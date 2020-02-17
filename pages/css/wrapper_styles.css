@@ -78,3 +78,61 @@ for test
 	height: 100%;
 	padding: 0;
 }
+.sidebar{
+	padding-top: 30px;
+	backface-visibility: hidden;
+	font-family: "Roboto Regular";
+	padding-left: 0;
+}
+.sidebar-item{
+	list-style: none;
+	color: #999999;
+	font-size: .75rem;
+	padding: 10px 0;
+	
+
+}
+.sidebar-item:before{
+	content: "▾";
+	color: #999999;
+	padding-right: 10px;
+	padding-left: 20px;
+}
+.sidebar-item-link{
+	color: #999999;
+	font-size: .75rem;
+	text-align: right;
+}
+.sidebar-link{
+	font-size: .75rem;
+	color: #999999;
+	padding-right: 5px;
+	padding-left: 20px;
+}
+.submenu{
+	padding-left: 15px;
+
+}
+.submenu-item{
+	list-style-type: none;
+}
+.down:after{
+	margin-left: 8px;
+}
+.submenu{
+	position: relative;
+	left: 0;
+	display: none;
+	opacity: 0;
+	z-index: 5;
+	transform: perspective(600px) rotateX(-90deg);
+	transform-origin: 0% 0%;
+	transition: .6s ease-in-out;
+}
+.submenu-active{
+	display: block;
+	opacity: 1;
+	transform: perspective(600px) rotateX(0deg);
+	transition: .6s ease-in-out;
+	background-color: black;
+}
