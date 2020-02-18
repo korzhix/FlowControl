@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 .container-fluid{
 	padding: 0;
 }
@@ -11,7 +13,7 @@
 	background-color: black;
 	height: 75px;
 	vertical-align: middle;
-	font-family: "Roboto Regular";
+	font-family: 'Roboto', sans-serif;
 }
 .nav{
 	height: 75px;
@@ -64,7 +66,7 @@ for test
 }
 .col-2{
 	margin-top: 1px;
-	padding: 0
+	padding: 0;
 }
 .col-10 > .container{
 	background-color: white;
@@ -79,38 +81,53 @@ for test
 	padding: 0;
 }
 .sidebar{
-	padding-top: 30px;
+	padding-top: 9px;
 	backface-visibility: hidden;
-	font-family: "Roboto Regular";
+	font-family: 'Roboto', sans-serif;
 	padding-left: 0;
 }
 .sidebar-item{
 	list-style: none;
 	color: #999999;
 	font-size: .75rem;
-	padding: 10px 0;
-	
-
+	margin: 20px 0;
 }
-.sidebar-item:before{
+
+.sidebar-item-link:before, .sidebar-link:before{
 	content: "▾";
 	color: #999999;
-	padding-right: 10px;
-	padding-left: 20px;
+	padding: 10px;
 }
 .sidebar-item-link{
 	color: #999999;
 	font-size: .75rem;
-	text-align: right;
+	padding-right: 102px;
+	display: inline-flex;
+	margin-bottom: -11px;
+	align-items: center;
+
+}
+.sidebar-item-link-active{
+	border-left: 2px solid red;
+	color: white;
+
+
 }
 .sidebar-link{
 	font-size: .75rem;
 	color: #999999;
-	padding-right: 5px;
-	padding-left: 20px;
+	display: inline-flex;
+	align-items: center;
+}
+.sidebar-item-link:hover, .sidebar-link:hover{
+	text-decoration: none;
+	color: white;
 }
 .submenu{
-	padding-left: 15px;
+	border-top: 0.5px solid #333333;
+	padding: 15px 5px 20px 15px;
+	margin-top: 11px;
+
 
 }
 .submenu-item{
@@ -133,6 +150,6 @@ for test
 	display: block;
 	opacity: 1;
 	transform: perspective(600px) rotateX(0deg);
-	transition: .6s ease-in-out;
+	animation: 1s
 	background-color: black;
 }
