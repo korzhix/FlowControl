@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/wrapper_styles.css">
 	<!-- link fontawesome to svg format -->
 	<script src="https://kit.fontawesome.com/1bf9561790.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<div class="container-fluid">
@@ -118,8 +119,27 @@
 						</div>
 					</div>
 					<div class="col-10">
-						<div class="container">
-							<iframe src="https://drive.google.com/drive/my-drive" width="100%" height="100%" align="center"></iframe> 
+						<div class="container disk-container">
+				
+							<ul class="nav disk-changer" id="myTab" role="tablist">
+							    <li class="disk-item">
+							    	<a class="changer_link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Google drive</a>
+							    </li>
+							    <li class="disk-item">
+							    	<a class="changer_link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">MMCS disc</a>
+							    </li>
+							</ul>
+		
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+									<iframe class="disk-container" src="https://drive.google.com/drive/my-drive" width="100%" height="95%" align="center" scrolling="auto"></iframe>
+								</div>
+								<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+									<iframe class="disk-container" src="https://disk.mmcs.sfedu.ru/login?referer=%2F" width="100%" height="95%" align="center" scrolling="auto"></iframe>
+									
+								</div>
+							</div>
+							 
 						</div>
 					</div>
 				</div>
