@@ -6,10 +6,10 @@ $( ".sidebar-item-link" ).click(function() {
 		$(this.parentNode).css("background-color", "unset");
 	}else{
 		$(this.parentNode).css("background-color", "black");
-	}
+	};
 
 	console.dir(this.parentNode);
 });
 $('li.sidebar-item').click(function(){
-	$('this').css("border-left", "1px solid red")
+	$('this').css("border-left", "1px solid red");
 });
