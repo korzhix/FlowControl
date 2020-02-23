@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/wrapper_styles.css">
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'mainApp/css/wrapper_styles.css' %}" type="text/css">
 	<!-- link fontawesome to svg format -->
 	<script src="https://kit.fontawesome.com/1bf9561790.js" crossorigin="anonymous"></script>
 
@@ -119,28 +120,8 @@
 						</div>
 					</div>
 					<div class="col-10">
-						<div class="container disk-container">
-				
-							<ul class="nav disk-changer" id="myTab" role="tablist">
-							    <li class="disk-item">
-							    	<a class="changer_link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Google drive</a>
-							    </li>
-							    <li class="disk-item">
-							    	<a class="changer_link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">MMCS disc</a>
-							    </li>
-							</ul>
-		
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-									<iframe class="disk-container" src="https://drive.google.com/drive/my-drive" width="100%" height="95%" align="center" scrolling="auto"></iframe>
-								</div>
-								<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-									<iframe class="disk-container" src="https://disk.mmcs.sfedu.ru/login?referer=%2F" width="100%" height="95%" align="center" scrolling="auto"></iframe>
-									
-								</div>
-							</div>
-							 
-						</div>
+						{% block content %}
+						{% endblock %}
 					</div>
 				</div>
 			</div>
@@ -150,6 +131,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="js/script.js"></script>
+	{% load static %}
+	<script src="{% static 'mainApp/js/script.js' %}"></script>
 </body>
 </html>
