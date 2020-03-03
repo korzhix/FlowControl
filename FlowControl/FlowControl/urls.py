@@ -20,5 +20,6 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainApp.urls')),
+    path('google84367067d362496e.html', views.google_conferming, name="google84367067d362496e.html"),
 
 ]
