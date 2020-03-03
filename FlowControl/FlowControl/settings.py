@@ -26,7 +26,7 @@ SECRET_KEY = 'i=fmmp%*=(ciw@quk!1$j8w7!6bi^0p8gqezu(ws*ua#mg3mgt'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-
+    'korzh.pythonanywhere.com',
 ]
 
 
