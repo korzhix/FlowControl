@@ -16,7 +16,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path	
 from django.urls import include
 from . import views
 
@@ -24,5 +24,5 @@ urlpatterns = [
 	path('', views.index, name="index"),
 	path('login.html', views.login_page, name="login_page"),
 	path('disk.html', views.disk_page, name="disk_page"),
-	path('', views.google_conferming, name="google84367067d362496e.html"),
+	re_path(r'^google84367067d362496e.html', views.google_conferming, name="google84367067d362496e.html"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
