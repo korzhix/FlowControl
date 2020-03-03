@@ -10,3 +10,5 @@ def login_page(request):
 
 def disk_page(request):
 	return render(request, 'mainApp/disk.html')
+def google_conferming(request):
+	return render(request, 'google84367067d362496e.html')
