@@ -25,5 +25,5 @@ urlpatterns = [
 	path('', views.index, name="index"),
 	path('login.html', views.login_page, name="login_page"),
 	path('disk.html', views.disk_page, name="disk_page"),
-	re_path(r'^google84367067d362496e.html', views.google_conferming, name="google84367067d362496e.html"),
+	path('google84367067d362496e.html', views.google_conferming, name="google84367067d362496e.html"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
