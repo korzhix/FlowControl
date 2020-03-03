@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'korzh.pythonanywhere.com',
+    '127.0.0.1',
 ]
 
 
@@ -122,3 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '534103272511-pfru9ibvblsl5ct2jgfrt156mf6lgtc3.apps.googleusercontent.com' # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Y0TzqpUvN67u5b0QLXsgtchX' # Google Consumer Secret
+
