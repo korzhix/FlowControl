@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '534103272511-pfru9ibvblsl5ct2jgfrt156mf6lgtc3.apps.googleusercontent.com' # Google Consumer Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Y0TzqpUvN67u5b0QLXsgtchX' # Google Consumer Secret
 
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
