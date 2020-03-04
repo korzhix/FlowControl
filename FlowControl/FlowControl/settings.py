@@ -129,6 +129,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '534103272511-pfru9ibvblsl5ct2jgfrt156mf6lgtc3.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Y0TzqpUvN67u5b0QLXsgtchX' # Google Consumer Secret
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
 ]
 
