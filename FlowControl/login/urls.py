@@ -17,11 +17,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from django.urls import re_path
-from django.urls import include
 from . import views
 
 urlpatterns = [
-	path('', views.index, name="index"),
-	path('disk.html', views.disk_page, name="disk_page"),
+    path("login", views.login , name="login")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
