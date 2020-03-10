@@ -8,6 +8,13 @@
 </head>
 <body>
 <a href='{% url "social:begin" "google-oauth2" %}'>Login with Google</a>
+<h1>Log-in</h1>
+    <p>Please, use the following form to log-in:</p>
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Log-in"></p>
+    </form>
 </body>
 </html>
 {% endblock %}
