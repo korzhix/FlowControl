@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.conf.urls import url
 """FlowControl URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -22,5 +22,7 @@ from django.urls import include
 from . import views
 
 urlpatterns = [
-	path('login.html', views.login_page, name="login_page"),
+	#path('login.html', views.login_page, name="login_page"),
+    url('login.html', views.user_login, name='login'),
+    url('', views.user_login)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
