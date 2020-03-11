@@ -1,5 +1,4 @@
 from django import forms
-from 
 
 class LoginForm(forms.Form):
     username = forms.CharField()
