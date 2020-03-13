@@ -7,14 +7,15 @@
     <title></title>
 </head>
 <body>
-<a href='{% url "social:begin" "google-oauth2" %}'>Login with Google</a>
-<h1>Log-in</h1>
-    <p>Please, use the following form to log-in:</p>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <p><input type="submit" value="Log-in"></p>
-    </form>
+<a href='{% url "social:begin" "google-oauth2" %}' style="color: white; background-color: black;">Login with Google</a>
+{% if user.is_authenticated %}
+<p style="color: white; background-color: black;">Задарова, {{user.username}}. Скоро мы заживем!</p>
+<a href="login/logout.html" style="color: white; background-color: black;">Ну, бывай</a>
+{% else %}
+<p style="color: white; background-color: black;">А? Тебе чево здесь?</p>
+<h1 style="color: white; background-color: black;">Log-in</h1>
+<a href="login/form.html" style="color: white; background-color: black;">ВХОДИТЕ!</a>
+{% endif %}
 </body>
 </html>
 {% endblock %}
