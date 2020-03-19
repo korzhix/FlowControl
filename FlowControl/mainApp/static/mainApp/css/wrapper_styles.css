@@ -7,20 +7,28 @@
 	background-image: url(../img/bg.png);
 	background-size: cover;
 	background-repeat: no-repeat;
-	height: 1000px;
+	background-attachment: fixed;
+	padding-top: 71px;
 }
 .header{
 	background-color: black;
 	height: 75px;
 	vertical-align: middle;
 	font-family: 'Roboto', sans-serif;
+
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+}
+.head-cont{
+	padding: 0;
 }
 .nav{
 	height: 75px;
 	align-items: center;
 }
 .header-list{
-	padding: 0;
+	margin: 0;
 	background-color: black;
 	width: 100%;
 }
@@ -193,4 +201,12 @@ iframe{
 }
 .disk-container{
 
+}
+
+
+
+@media screen and (max-width: 992px){
+	.header-list{
+		width: auto;
+	}
 }
