@@ -1,0 +1,22 @@
+{% extends "mainApp/wrapper.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<a href='{% url "social:begin" "google-oauth2" %}' style="color: white; background-color: black;">Login with Google</a>
+{% if user.is_authenticated %}
+<p style="color: white; background-color: black;">Задарова, {{user.username}}. Скоро мы заживем!</p>
+<a href="/logout.html" style="color: white; background-color: black;">Ну, бывай</a>
+{% else %}
+<p style="color: white; background-color: black;">А? Тебе чево здесь?</p>
+<h1 style="color: white; background-color: black;">Log-in</h1>
+<a href="/login.html" style="color: white; background-color: black;">ВХОДИТЕ!</a>
+<a href="/register.html" style="color: white; background-color: black;">ДАВАЙТЕ ПОЗНОКОМИМСЯ</a>
+{% endif %}
+</body>
+</html>
+{% endblock %}
