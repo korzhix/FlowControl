@@ -22,6 +22,6 @@ from mainApp import  views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('social-auth/', include('social_django.urls', namespace="social")),
-    re_path(r"login*", include('loginApp.urls')),
+    re_path(r"account*", include('accountApp.urls')),
     path('', include('mainApp.urls')),
 ]
