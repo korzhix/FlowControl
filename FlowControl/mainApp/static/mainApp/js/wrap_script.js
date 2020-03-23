@@ -1,7 +1,7 @@
 $( ".sidebar-item-link" ).click(function() {
 	$( this.nextElementSibling ).toggleClass( "submenu-active", 1000, "ease-in");
 	$( this ).toggleClass( "sidebar-item-link-active", 1000, "ease-in" );
-
+	console.log('работай ебобо');
 	if (this.parentNode.style.backgroundColor == "black"){
 		$(this.parentNode).css("background-color", "unset");
 	}else{
@@ -22,4 +22,4 @@ $( ".header-link" ).click(function() {
 	}else{
 		$(this.parentNode).css("background-color", "black");
 	};
-};
+});
