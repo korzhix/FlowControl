@@ -1,7 +1,7 @@
 $( ".sidebar-item-link" ).click(function() {
 	$( this.nextElementSibling ).toggleClass( "submenu-active", 1000, "ease-in");
 	$( this ).toggleClass( "sidebar-item-link-active", 1000, "ease-in" );
-	console.log('работай ебобо');
+
 	if (this.parentNode.style.backgroundColor == "black"){
 		$(this.parentNode).css("background-color", "unset");
 	}else{
@@ -15,11 +15,13 @@ $('li.sidebar-item').click(function(){
 
 $( ".header-link" ).click(function() {
 	$( this.nextElementSibling ).toggleClass( "submenu-active", 1000, "ease-in");
-	$( this ).toggleClass( "sidebar-item-link-active", 1000, "ease-in" );
+	$(".header-link").removeClass('header-link-active');
+	$( this ).addClass( "header-link-active", 1000, "ease-in" );
 
 	if (this.parentNode.style.backgroundColor == "black"){
 		$(this.parentNode).css("background-color", "unset");
 	}else{
 		$(this.parentNode).css("background-color", "black");
 	};
+
 });
