@@ -91,4 +91,4 @@ def update_profile(request):
 
 @login_required
 def get_brs(request):
-    
+    pass
