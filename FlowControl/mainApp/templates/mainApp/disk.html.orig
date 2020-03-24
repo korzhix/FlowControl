@@ -1,6 +1,8 @@
 {% extends "mainApp/wrapper.html" %}
 {% block content %}
+<<<<<<< HEAD
 
+=======
 <ul class="nav disk-changer" id="myTab" role="tablist">
     <li class="disk-item">
     	<a class="changer_link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Google drive</a>
@@ -9,6 +11,7 @@
     	<a class="changer_link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">MMCS disk</a>
     </li>
 </ul>
+>>>>>>> 146bfa5be65737d46f82fa58b6afa0b5a9720743
 <div class="container disk-container">
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
