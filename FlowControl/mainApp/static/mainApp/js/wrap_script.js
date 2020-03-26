@@ -32,16 +32,16 @@ const nextPage = (event) => {
 			localStorage['menuId'] = event.target.parentNode.id;
 		}else {
 			localStorage['menuId'] = event.target.id;
-		};
-		
+		};s
+		console.log(localStorage['menuId']);
+
 	};
 };
-console.log(localStorage['menuId']);
-const active = document.getElementById(localStorage['menuId']);
-$(".header-link").removeClass('header-link-active');
-$( '#' + localStorage['menuId'] ).addClass( "header-link-active", 1000, "ease-in" );
+if (document.location.pathname === '/'){
+	localStorage['menuId'] = '2';
+}else{
+	$(".header-link").removeClass('header-link-active');
+	$('#' + localStorage['menuId']).addClass("header-link-active");
 
-localStorage['menuId'] = '2';
-console.log(active);
+};
 document.addEventListener('click', nextPage);
-
