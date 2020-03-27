@@ -7,10 +7,14 @@
     <title></title>
 </head>
 <body>
+<h1 style="color: white; background-color: black;">Log-in</h1>
+<h1 style="color: white; background-color: black;">Log-in</h1>
+<h1 style="color: white; background-color: black;">Log-in</h1>
+<h1 style="color: white; background-color: black;">Log-in</h1>
 <a href='{% url "social:begin" "google-oauth2" %}' style="color: white; background-color: black;">Login with Google</a>
 {% if user.is_authenticated %}
 <p style="color: white; background-color: black;">Задарова, {{user.username}}. Скоро мы заживем!</p>
-<a href="/logout.html" style="color: white; background-color: black;">Ну, бывай</a>
+<a href="/account/logout.html" style="color: white; background-color: black;">Ну, бывай</a>
 {% else %}
 <p style="color: white; background-color: black;">А? Тебе чево здесь?</p>
 <h1 style="color: white; background-color: black;">Log-in</h1>
