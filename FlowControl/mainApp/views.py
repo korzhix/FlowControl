@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def index(request):
 	return render(request, "mainApp/disk.html")
+
+def disk_page(request):
+	return render(request, 'mainApp/disk.html')
