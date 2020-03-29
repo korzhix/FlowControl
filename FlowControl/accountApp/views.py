@@ -71,8 +71,8 @@ def user_page(request):
     if request.user.pk is not None:
         student = Profile.objects.get(pk=request.user.pk)
         schadule_list = student.schadule.split('SEP')
-        print(schadule_list)
-        return render(request, 'accountApp/user.html', {'schadule_list': schadule_list})
+        print(schadule_list[1:])
+        return render(request, 'accountApp/user.html', {'schadule_list': schadule_list[1:]})
 
     return render(request, 'accountApp/user.html')
 
@@ -146,7 +146,7 @@ def get_brs_info(request):
     student.scoreline = ''.join(brs_table.values())
     student.schadule = ''.join(brs_table.keys())
     student.save()
-    return HttpResponse(student.schadule + ' ' + student.scoreline + 'asd'+student.student_name)
+    return HttpResponseRedirect('/account/')
 
 @login_required
 @transaction.atomic
@@ -164,6 +164,17 @@ def update_profile(request):
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
+    if request.user.pk is not None:
+        student = Profile.objects.get(pk=request.user.pk)
+        schadule_list = student.schadule.split('SEP')
+        if len(schadule_list) <= 1:
+            return render(request, 'accountApp/edit.html', {'schadule_list': [],
+                                                            'user_form': user_form, 'profile_form': profile_form})
+
+        else:
+            return render(request, 'accountApp/edit.html', {'schadule_list': schadule_list[1:],
+                                                            'user_form': user_form, 'profile_form': profile_form})
+
     return render(request, 'accountApp/edit.html', {
         'user_form': user_form,
         'profile_form': profile_form
