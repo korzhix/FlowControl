@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="{% static 'mainApp/css/wrap_styles.css' %}" type="text/css">
 	<!-- link fontawesome to svg format -->
 	<script src="https://kit.fontawesome.com/1bf9561790.js" crossorigin="anonymous"></script>
+	<!-- link chartJs-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 </head>
 <body>
@@ -38,6 +40,9 @@
 						    </li>
 						    <li class="header-item nav-item col-lg-2">
 						    	<a class="header-link nav-link header-link-active" href="/disk.html">
+						    <li class="header-item nav-item col-lg-2" >
+						    	<a class="header-link nav-link header-link-active" href="/disk.html" id="2">
+>>>>>>> 222d713c3352af6de3ad3ea8f74c0accf37691ee
 						    		<i class="far fa-window-restore"></i>
 						    		Диск
 						    	</a>
@@ -50,6 +55,8 @@
 						    </li>
 							<li class="header-item nav-item offset-lg-2 col-lg-2">
 						    	<a class="header-link nav-link" href="/account/">
+							<li class="header-item nav-item offset-lg-2 col-lg-2" >
+						    	<a class="header-link nav-link" href="/account/" id="4">
 						    		<i class="far fa-user"></i>
 						    		Профиль
 						    	</a>
@@ -151,5 +158,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	{% load static %}
 	<script src="{% static 'mainApp/js/wrap_script.js' %}"></script>
+	<script src="{% static 'mainApp/js/stat_script.js' %}"></script>
 </body>
 </html>
