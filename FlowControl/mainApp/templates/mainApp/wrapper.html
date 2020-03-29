@@ -68,8 +68,11 @@
 						<div class="container">
 							{% if user.is_authenticated %}
 							<ul class="sidebar">
+
+
+								{% for subject in schadule_list %}
 								<li class="sidebar-item down">
-									<a class="sidebar-item-link" href="#">История</a>
+									<a class="sidebar-item-link" href="#">{{ subject }}</a>
 									<ul class="submenu">
 										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
 										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
@@ -77,52 +80,9 @@
 										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
 									</ul>
 								</li>
-								<li class="sidebar-item down">
-									<a class="sidebar-item-link" href="#">Математический Анализ</a>
-									<ul class="submenu">
-										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
-									</ul>
-								</li>
-								<li class="sidebar-item down">
-									<a class="sidebar-item-link" href="#">Алгебра и Геометрия</a>
-									<ul class="submenu">
-										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
-									</ul>
-								</li>
-								<li class="sidebar-item down">
-									<a class="sidebar-item-link" href="#">Дискретная Математика</a>
-									<ul class="submenu">
-										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
-									</ul>
-								</li>
-								<li class="sidebar-item down">
-									<a class="sidebar-item-link" href="#">Основы Алгоритмизации и Программирования</a>
-									<ul class="submenu">
-										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
-									</ul>
-								</li>
-								<li class="sidebar-item down">
-									<a class="sidebar-item-link" href="#">Английский язык</a>
-									<ul class="submenu">
-										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
-										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
-									</ul>
-								</li>
-							</ul>
+								{% empty %}
+								<a class="sidebar-item-link" href="./account/edit.html">Заполните учетные данные ЛК ЮФУ, чтобы видеть список предметов </a>
+								{% endfor %}
 							{% endif %}
 						</div>
 					</div>
