@@ -67,7 +67,13 @@ class LogoutView(View):
         return HttpResponseRedirect("/")
 
 
-def user_login(request):
+def user_page(request):
+    if request.user.pk is not None:
+        student = Profile.objects.get(pk=request.user.pk)
+        schadule_list = student.schadule.split('SEP')
+        print(schadule_list)
+        return render(request, 'accountApp/user.html', {'schadule_list': schadule_list})
+
     return render(request, 'accountApp/user.html')
 
 @login_required()
@@ -139,6 +145,7 @@ def get_brs_info(request):
     student.student_name = soup.find('div', {'class': 'username'}).text
     student.scoreline = ''.join(brs_table.values())
     student.schadule = ''.join(brs_table.keys())
+    student.save()
     return HttpResponse(student.schadule + ' ' + student.scoreline + 'asd'+student.student_name)
 
 @login_required
