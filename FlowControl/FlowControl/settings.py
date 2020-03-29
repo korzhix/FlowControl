@@ -25,7 +25,10 @@ SECRET_KEY = 'i=fmmp%*=(ciw@quk!1$j8w7!6bi^0p8gqezu(ws*ua#mg3mgt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'korzh.pythonanywhere.com',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -38,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'accountApp',
+
 ]
 
 MIDDLEWARE = [
@@ -119,3 +125,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '534103272511-pfru9ibvblsl5ct2jgfrt156mf6lgtc3.apps.googleusercontent.com' # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Y0TzqpUvN67u5b0QLXsgtchX' # Google Consumer Secret
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+LOGIN_URL = 'index'
+LOGIN_REDIRECT_URL = 'index'
