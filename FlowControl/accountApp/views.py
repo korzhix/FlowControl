@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import SfeduStudent
-from .forms import LoginForm
 from django.contrib import auth
 from .models import Profile
 from django.contrib.auth import login
@@ -18,6 +16,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib import messages
 from django.shortcuts import redirect
+import requests
+from bs4 import BeautifulSoup
 
 
 class RegisterFormView(FormView):
@@ -37,8 +37,6 @@ class RegisterFormView(FormView):
         # Вызываем метод базового класса
         return super(RegisterFormView, self).form_valid(form)
 
-
-# Опять же, спасибо django за готовую форму аутентификации.
 # Функция для установки сессионного ключа.
 # По нему django будет определять, выполнил ли вход пользователь.
 
@@ -54,7 +52,7 @@ class LoginFormView(FormView):
     def form_valid(self, form):
         # Получаем объект пользователя на основе введённых в форму данных.
         self.user = form.get_user()
-        #student = Profile()
+
         # Выполняем аутентификацию пользователя.
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
@@ -72,8 +70,13 @@ class LogoutView(View):
 def user_login(request):
     return render(request, 'accountApp/user.html')
 
+@login_required()
+def get_brs_info(request):
 
-    payload_to_login = {'openid_url': SfeduStudent.sfedu_username, 'password': SfeduStudent.sfedu_pass}
+    user = request.user
+    student = Profile.objects.get(pk=user.pk)
+    payload_to_login = {'openid_url': student.sfedu_username, 'password': student.sfedu_pass}
+
     headers_to_login = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'Accept-Encoding': 'gzip, deflate, br',
@@ -90,9 +93,8 @@ def user_login(request):
         'Upgrade-Insecure-Requests': '1',
     }
 
-    # СМОТРИ В УРЛЫ И ПОСТАВЬ ТАМ ЛОГИН СВОЙ ВМЕСТО НАПОЛНИТЕЛЯ
     login_url = r'https://openid.sfedu.ru/server.php/login'
-    url_from_brs_to_openid = r'https://grade.sfedu.ru/handler/sign/openidlogin?loginopenid=' + SfeduStudent.sfedu_username + '@sfedu.ru&user_role=student'
+    url_from_brs_to_openid = r'https://grade.sfedu.ru/handler/sign/openidlogin?loginopenid=' + str(student.sfedu_username) + '@sfedu.ru&user_role=student'
 
     headers_from_brs_to_openid = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -131,10 +133,14 @@ def user_login(request):
         brs_table[key] = score_line
         score_line = ''
 
-    SfeduStudent.student_name = soup.find('div', {'class': 'username'}).text
-    SfeduStudent.score_line = ''.join(brs_table.values())
-    SfeduStudent.schadule = ''.join(brs_table.keys())
-    
+    if brs_table == {}:
+        return HttpResponse('Для синхронизации с БРС необходимо заполнить учетные данные SFEDU')
+
+    student.student_name = soup.find('div', {'class': 'username'}).text
+    student.scoreline = ''.join(brs_table.values())
+    student.schadule = ''.join(brs_table.keys())
+    return HttpResponse(student.schadule + ' ' + student.scoreline + 'asd'+student.student_name)
+
 @login_required
 @transaction.atomic
 def update_profile(request):
@@ -155,7 +161,3 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
-
-@login_required
-def get_brs(request):
-    pass
