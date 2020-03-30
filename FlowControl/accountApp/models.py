@@ -13,6 +13,7 @@ class Profile(models.Model):
     schadule = models.CharField(max_length=5000, default='empty')
     student_name = models.CharField(max_length=5000, default='empty')
     scoreline = models.CharField(max_length=5000, default='empty')
+    student_info = models.CharField(max_length=5000, default='empty')
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

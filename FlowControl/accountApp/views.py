@@ -71,10 +71,49 @@ def user_page(request):
     if request.user.pk is not None:
         student = Profile.objects.get(pk=request.user.pk)
         schadule_list = student.schadule.split('SEP')
-        print(schadule_list[1:])
-        return render(request, 'accountApp/user.html', {'schadule_list': schadule_list[1:]})
+        info = student.student_info
+        if info == 'empty':
+            info = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
+        return render(request, 'accountApp/user.html', {'schadule_list': schadule_list[1:], 'info': info})
 
     return render(request, 'accountApp/user.html')
+
+@login_required()
+def register_note_client(request, email='korzh@sfedu.ru', password='Vk#nF#RwA4.LpW2'):
+    url_to_register = r'https://nimbusweb.me/auth?f=register&int_source=top_button_no_email'
+
+    headers_to_register = {
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'ru,en-US;q=0.9,en;q=0.8,ru-RU;q=0.7,und;q=0.6,de;q=0.5',
+        'origin': 'https://nimbusweb.me',
+        'referer': 'https://nimbusweb.me/ru/',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'same-origin',
+        'upgrade-insecure-requests': '1',
+    }
+
+    headers_to_form = {
+        'accept': '*/*',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'ru,en-US;q=0.9,en;q=0.8,ru-RU;q=0.7,und;q=0.6,de;q=0.5',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'cookie': 'NM_FIRST_CLICK=%7B%22first-click-referer%22%3A%22https%3A%5C%2F%5C%2Fwww.google.com%5C%2F%22%2C%22first-click-utm-source%22%3A%22nodata%22%2C%22first-click-utm-medium%22%3A%22direct%22%2C%22first-click-utm-campaign%22%3A%22%22%2C%22first-click-utm-term%22%3A%22%22%2C%22first-click-utm-content%22%3A%22%22%2C%22first-click-date%22%3A%222020-03-30+12%3A56%3A56%22%7D; eversessionid=11g64W17eq6p2B3VHxcoxIaZeHnN17kF; _ga=GA1.2.564419870.1585573020; _gid=GA1.2.1016265769.1585573020; NM_LAST_CLICK=%7B%22last-click-referer%22%3A%22%22%2C%22last-click-utm-source%22%3A%22nodata%22%2C%22last-click-utm-medium%22%3A%22direct%22%2C%22last-click-utm-campaign%22%3A%22%22%2C%22last-click-utm-term%22%3A%22%22%2C%22last-click-utm-content%22%3A%22%22%2C%22last-click-date%22%3A%222020-03-30+12%3A57%3A08%22%7D; _fbp=fb.1.1585573031765.416816130; _gat_gtag_UA_67774717_27=1; _gali=form_register',
+        'origin': 'https://nimbusweb.me',
+        'referer': 'https://nimbusweb.me/auth/?f=register&int_source=top_button_no_email',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'x-client-software': 'auth_form',
+        'x-requested-with': 'XMLHttpRequest',
+    }
+
+    url_to_pass_form = r'https://nimbusweb.me/auth/api/register'
+    payload = {"login": email, "password": password, "service": "nimbus", "subscribe": 'true'}
+    with requests.Session() as s:
+        responce_from_register_page = s.get(url_to_register, headers=headers_to_register)
+        responce_from_post = s.post(url_to_pass_form, headers=headers_to_form, data=payload)
+
+    return HttpResponse(responce_from_post)
 
 @login_required()
 def get_brs_info(request):
@@ -142,6 +181,12 @@ def get_brs_info(request):
     if brs_table == {}:
         return HttpResponse('Для синхронизации с БРС необходимо заполнить учетные данные SFEDU')
 
+    student_info_tags = list(soup.find('div', {'id': 'profileInfo'}))
+    student_info = ''
+
+    for tag in student_info_tags[1:]:
+        student_info += tag.text + 'SEP'
+    student.student_info = student_info
     student.student_name = soup.find('div', {'class': 'username'}).text
     student.scoreline = ''.join(brs_table.values())
     student.schadule = ''.join(brs_table.keys())
