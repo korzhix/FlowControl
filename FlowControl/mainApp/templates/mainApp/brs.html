@@ -1,4 +1,11 @@
+{% extends "mainApp/wrapper.html" %}
+{% block content %}
+
+<p> {{ schadule_list }} </p>
+<p> {{ scores }} </p>
 <div class="brs_container container">
 	<canvas id="myChart1"></canvas>
 	<canvas id="myChart2"></canvas>
 </div>
+
+{% endblock%}

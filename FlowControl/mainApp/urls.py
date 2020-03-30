@@ -25,4 +25,5 @@ urlpatterns = [
 	path('', views.index, name="index"),
 	path('notes.html',views.display_notes),
 	path('disk.html', views.disk_page, name="disk_page"),
+	path('brs.html', views.brs_view),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

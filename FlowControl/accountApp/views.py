@@ -117,7 +117,7 @@ def register_note_client(request, email='korzh@sfedu.ru', password='Vk#nF#RwA4.L
 def get_brs_info(request):
 
     user = request.user
-    student_settings = Settings.objects.create(pk=user.pk)
+    #student_settings = Settings.objects.create(user=user)
     student = Profile.objects.get(pk=user.pk)
     payload_to_login = {'openid_url': student.sfedu_username, 'password': student.sfedu_pass}
 
@@ -188,7 +188,9 @@ def get_brs_info(request):
     student.student_info = student_info
     student.student_name = soup.find('div', {'class': 'username'}).text
     student.scoreline = ''.join(brs_table.values())
-    student.schadule = ''.join(brs_table.keys())
+    student.schadule = ''.join(list(brs_table.keys())[1:])
+
+
     student.save()
     return HttpResponseRedirect('/account/')
 
