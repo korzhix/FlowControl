@@ -1,8 +1,11 @@
 {% extends "mainApp/wrapper.html" %}
 {% block content %}
 
-<p> {{ schadule_list }} </p>
-<p> {{ scores }} </p>
+<p class="schadule-string"> {{ schadule }} </p>
+<p class="current-scores-string"> {{ current }} </p>
+<p class="max-current-scores-string"> {{ max_current }} </p>
+<p class="absolute-max-scores-line"> {{ absolute_max }} </p>
+
 <div class="brs_container container">
 	<canvas id="myChart1"></canvas>
 	<canvas id="myChart2"></canvas>

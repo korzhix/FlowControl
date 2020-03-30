@@ -68,11 +68,11 @@ class LogoutView(View):
 def user_page(request):
     if request.user.pk is not None:
         student = Profile.objects.get(pk=request.user.pk)
-        schadule_list = student.schadule.split('SEP')
+        schadule = student.schadule[2:-2].replace('"', '').split(',')
         info = student.student_info
         if info == 'empty':
             info = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
-        return render(request, 'accountApp/user.html', {'schadule_list': schadule_list[1:], 'info': info})
+        return render(request, 'accountApp/user.html', {'schadule': schadule, 'info': info})
 
     return render(request, 'accountApp/user.html')
 
@@ -160,37 +160,51 @@ def get_brs_info(request):
         headers_to_login['Referer'] = responce_from_brs_to_login.url
         login_responce = s.post(login_url, headers=headers_to_login, data=payload_to_login)
 
-    brs_table = {}
     soup = BeautifulSoup(login_responce.content, 'html.parser')
     disc_tag_list = soup.findAll('td', {'class': 'discTitle'})
     score_tag_list = soup.findAll('td', {'class': 'discRating'})
-    small_sep = 'sep'
-    big_SEP = 'SEP'
-    score_line = small_sep
+
+    current = []
+    current_max = []
+    absolute_max = []
+    schadule = []
 
     for i in range(1, len(score_tag_list) + 1):
-        key = big_SEP + disc_tag_list[i].find('a').text
-
+        schadule.append(disc_tag_list[i].find('a').text)
         spans = score_tag_list[i - 1].findAll('span')
-        for j in range(len(spans)):
-            score_line += spans[j].text + small_sep
-        brs_table[key] = score_line
-        score_line = ''
+        current.append(spans[0].text)
+        current_max.append(spans[1].text)
+        absolute_max.append(spans[2].text)
 
-    if brs_table == {}:
+    if len(schadule) <= 1:
         return HttpResponse('Для синхронизации с БРС необходимо заполнить учетные данные SFEDU')
 
     student_info_tags = list(soup.find('div', {'id': 'profileInfo'}))
-    student_info = ''
+    student_info = []
 
     for tag in student_info_tags[1:]:
-        student_info += tag.text + 'SEP'
+        student_info.append(tag.text)
+    student_info = str(student_info)
+    student_info = "'" + student_info.replace("'",'"') + "'"
+
+    schadule = str(schadule)
+    schadule = "'" + schadule.replace("'", '"') + "'"
+
+    current = str(current)
+    current = "'" + current.replace("'", '"') + "'"
+
+    current_max = str(current_max)
+    current_max = "'" + current_max.replace("'", '"') + "'"
+
+    absolute_max = str(absolute_max)
+    absolute_max = "'" + absolute_max.replace("'", '"') + "'"
+
+    student.current_scores = current
+    student.current_max_scores = current_max
+    student.absolute_max_scores = absolute_max
     student.student_info = student_info
     student.student_name = soup.find('div', {'class': 'username'}).text
-    student.scoreline = ''.join(brs_table.values())
-    student.schadule = ''.join(list(brs_table.keys())[1:])
-
-
+    student.schadule = schadule
     student.save()
     return HttpResponseRedirect('/account/')
 
@@ -212,13 +226,13 @@ def update_profile(request):
         profile_form = ProfileForm(instance=request.user.profile)
     if request.user.pk is not None:
         student = Profile.objects.get(pk=request.user.pk)
-        schadule_list = student.schadule.split('SEP')
-        if len(schadule_list) <= 1:
-            return render(request, 'accountApp/edit.html', {'schadule_list': [],
+        schadule = student.schadule[2:-2].replace('"','').split(',')
+        if len(schadule) <= 1:
+            return render(request, 'accountApp/edit.html', {'schadule': [],
                                                             'user_form': user_form, 'profile_form': profile_form})
 
         else:
-            return render(request, 'accountApp/edit.html', {'schadule_list': schadule_list[1:],
+            return render(request, 'accountApp/edit.html', {'schadule': schadule,
                                                             'user_form': user_form, 'profile_form': profile_form})
 
     return render(request, 'accountApp/edit.html', {
