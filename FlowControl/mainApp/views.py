@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from accountApp.models import Profile
 # Create your views here.
 
@@ -40,3 +40,12 @@ def display_notes(request):
 			return render(request, 'mainApp/notes.html', {'schadule_list': schadule_list[1:]})
 
 	return render(request, 'mainApp/notes.html')
+
+@login_required
+def brs_view(request):
+	student = Profile.objects.get(pk=request.user.pk)
+	schadule_list = student.schadule.split('SEP')[1:]
+	schadule_list = str(schadule_list)
+	schadule_list = "'" + schadule_list.replace("'", '"') + "'"
+
+	return render(request, 'mainApp/brs.html', {'schadule_list': schadule_list})
