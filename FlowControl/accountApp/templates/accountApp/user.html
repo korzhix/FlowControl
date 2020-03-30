@@ -9,6 +9,7 @@
 <body>
 <a href='{% url "social:begin" "google-oauth2" %}' style="color: white; background-color: black;">Login with Google</a>
 {% if user.is_authenticated %}
+<p>{{ info }}</p>
 <p style="color: white; background-color: black;">Задарова, {{user.username}}. Скоро мы заживем!</p>
 <a href="/account/logout.html" style="color: white; background-color: black;">Ну, бывай</a>
 {% else %}
