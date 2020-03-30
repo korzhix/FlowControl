@@ -5,17 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    {% load static %}
+	<link rel="stylesheet" href="{% static 'mainApp/css/wrapper_styles.css' %}" type="text/css">
+
 </head>
 <body>
-<a href='{% url "social:begin" "google-oauth2" %}' style="color: white; background-color: black;">Login with Google</a>
+ <!-- <a href='{% url "social:begin" "google-oauth2" %}' style="color: white; background-color: black;">Login with Google</a> -->
 {% if user.is_authenticated %}
 <p style="color: white; background-color: black;">Задарова, {{user.username}}. Скоро мы заживем!</p>
 <a href="/logout.html" style="color: white; background-color: black;">Ну, бывай</a>
 {% else %}
-<p style="color: white; background-color: black;">А? Тебе чево здесь?</p>
-<h1 style="color: white; background-color: black;">Log-in</h1>
-<a href="/account/login.html" style="color: white; background-color: black;">ВХОДИТЕ!</a>
-<a href="/account/register.html" style="color: white; background-color: black;">ДАВАЙТЕ ПОЗНОКОМИМСЯ</a>
+<ul class="nav sign_nav" id="myTab" role="tablist">
+	<li class="nav-item sign-item">
+	    <a class="nav-link sign-link sign-link-active" id="in-tab" data-toggle="tab" href="#sign_in" role="tab" aria-controls="sign_in" aria-selected="true">SIGN IN</a>
+	</li>
+	<li class="nav-item sign-item">
+	    <a class="nav-link sign-link" id="up-tab" data-toggle="tab" href="#sign_up" role="tab" aria-controls="sign_up" aria-selected="false">SIGN UP</a>
+	</li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="sign_in" role="tabpanel" aria-labelledby="in-tab">
+  		<iframe class="user_frame" src="login.html" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+    </div>
+    <div class="tab-pane fade" id="sign_up" role="tabpanel" aria-labelledby="up-tab">
+    	<iframe class="user_frame" src="register.html" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+    </div>
+</div>
 {% endif %}
 </body>
 </html>

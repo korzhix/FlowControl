@@ -45,3 +45,11 @@ if (document.location.pathname === '/'){
 
 };
 document.addEventListener('click', nextPage);
+
+
+const id_password = getElementById("id_password");
+const id_password1 = getElementById("id_password1");
+const id_password2 = getElementById("id_password2");
+const id_username = getElementById("id_username");
+
+console.dir(id_password);
