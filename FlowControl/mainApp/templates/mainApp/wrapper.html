@@ -65,7 +65,7 @@
 		<div class="main">
 			<div class="container">
 				<div class="row">
-					<div class="col-2">
+					<div class="col-md-2 col-sm-3">
 						<div class="container">
 							<ul class="sidebar">
 								<li class="sidebar-item down">
@@ -125,7 +125,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-10">
+					<div class="col-md-10 col-sm-9">
 						{% block content %}
 						{% endblock %}
 					</div>
@@ -153,5 +153,6 @@
 	{% load static %}
 	<script src="{% static 'mainApp/js/wrap_script.js' %}"></script>
 	<script src="{% static 'mainApp/js/stat_script.js' %}"></script>
+	<script src="{% static 'accountApp/js/user_script.js' %}"></script>
 </body>
 </html>
