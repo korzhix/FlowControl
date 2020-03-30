@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib import auth
 from .models import Profile
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
@@ -9,7 +8,6 @@ from django.views.generic.base import View
 from django.contrib.auth import logout
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import get_object_or_404
 from .forms import ProfileForm
 from .forms import UserForm
 from django.contrib.auth.decorators import login_required
@@ -18,7 +16,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 import requests
 from bs4 import BeautifulSoup
-
+from .models import Settings
 
 class RegisterFormView(FormView):
     # form_class = UserCreationForm
@@ -119,6 +117,7 @@ def register_note_client(request, email='korzh@sfedu.ru', password='Vk#nF#RwA4.L
 def get_brs_info(request):
 
     user = request.user
+    student_settings = Settings.objects.create(pk=user.pk)
     student = Profile.objects.get(pk=user.pk)
     payload_to_login = {'openid_url': student.sfedu_username, 'password': student.sfedu_pass}
 
