@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 .container-fluid{
 	padding: 0;
 }
@@ -219,6 +218,60 @@ iframe{
 .footer > .container{
 	margin: 0 auto;
 }
+
+
+/* Страница пользователя */
+
+
+.helptext, .field_log > ul, .field_log > p > label{
+	display: none;
+}
+.sign_nav{
+	margin-top: 60px;
+	justify-content: center;
+}
+.sign-link{
+	font-size: 24px;
+	color: white;
+	font-weight: 700;
+	padding: 5px 0;
+	margin: 0 20px;
+}
+.sign-link-active{
+	border-bottom: 2px solid #ffcc33;
+}
+
+#id_password, #id_password1, #id_password2, #id_username{
+	background: none;
+	border: none;
+	border-bottom: 1px solid white;
+	width: 350px;
+	height: 30px;
+	margin-bottom: 60px;
+}
+#id_password:hover, #id_password1:hover, #id_password2:hover, #id_username:hover{
+	outline: none;
+	outline-offset: 0px;
+
+}
+
+.but-log{
+	padding: 13px 50px;
+	background-color: #CC6633;
+	border-radius: 25% 0;
+	border: none;
+	outline: none;
+	margin-top: 40px;
+
+}
+.but-log:focus{
+	outline: none;
+}
+.field_log{
+	text-align: center;
+}
+
+
 
 
 
