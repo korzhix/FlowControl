@@ -28,3 +28,7 @@ def disk_page(request):
 			return render(request, 'mainApp/disk.html', {'schadule_list': schadule_list[1:]})
 
 	return render(request, 'mainApp/disk.html')
+
+def display_notes(request):
+
+	return render(request, 'mainApp/notes.html')
