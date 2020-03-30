@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 # Create your models here.
 class Profile(models.Model):
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     sfedu_pass = models.CharField(max_length=50)
     sfedu_username = models.CharField(max_length=500,default='Студент')
@@ -23,3 +24,10 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+class Settings(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    url_of_notes = models.URLField(max_length=500, default='https://nimbusweb.me')
+    url_of_disk = models.URLField(max_length=500, default='https://drive.google.com/drive/my-drive')
