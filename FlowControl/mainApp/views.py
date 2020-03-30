@@ -30,5 +30,13 @@ def disk_page(request):
 	return render(request, 'mainApp/disk.html')
 
 def display_notes(request):
+	if request.user.pk is not None:
+		student = Profile.objects.get(pk=request.user.pk)
+		schadule_list = student.schadule.split('SEP')
+		if len(schadule_list) <= 1:
+			return render(request, 'mainApp/notes.html', {'schadule_list': []})
+
+		else:
+			return render(request, 'mainApp/notes.html', {'schadule_list': schadule_list[1:]})
 
 	return render(request, 'mainApp/notes.html')
