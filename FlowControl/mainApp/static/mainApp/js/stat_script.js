@@ -2,10 +2,22 @@ let ctx = document.getElementById('myChart1').getContext('2d');
 let ctx2 = document.getElementById('myChart2').getContext('2d');
 
 // Прием данных
+function srezi(s) {
+    arr = s.split(' ');
+
+    for(let i = 0; i < arr.length; i++){
+        if (arr[i].length > 3){
+            arr[i] = arr[i].slice(0, 3) + '.';
+        };
+    };
+    s = arr.join(' ');
+    return s;
+}
 
 let subjects = document.getElementsByClassName('schadule-string')[0];
 subjects = subjects.innerHTML.trim();
 subjects = JSON.parse(subjects);
+subjects = subjects.map(srezi);
 
 let current_balls = document.getElementsByClassName('current-scores-string')[0];
 current_balls = current_balls.innerHTML.trim();
@@ -14,6 +26,9 @@ current_balls = JSON.parse(current_balls);
 let max_balls = document.getElementsByClassName('max-current-scores-string')[0];
 max_balls = max_balls.innerHTML.trim();
 max_balls = JSON.parse(max_balls);
+
+
+
 
 // Обработка данных
 
