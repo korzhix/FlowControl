@@ -1,5 +1,3 @@
-$('.sign-link').click(function() {  
-    $('.sign-link').not(this).removeClass('sign-link-active');
-    $(this).toggleClass('sign-link-active');
-});
+const pass1 = document.getElementById('id_password1');
 
+console.log(pass1)
