@@ -17,6 +17,9 @@ from django.shortcuts import redirect
 import requests
 from bs4 import BeautifulSoup
 from .models import Settings
+from .models import Sidebar
+from .forms import SettingsForm
+from .forms import SidebarForm
 
 class RegisterFormView(FormView):
     # form_class = UserCreationForm
@@ -68,11 +71,13 @@ class LogoutView(View):
 def user_page(request):
     if request.user.pk is not None:
         student = Profile.objects.get(pk=request.user.pk)
-        schadule = student.schadule[2:-2].replace('"', '').split(',')
         info = student.student_info
         if info == 'empty':
             info = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
-        return render(request, 'accountApp/user.html', {'schadule': schadule, 'info': info})
+            sidebar_items = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
+        else:
+            sidebar_items = Sidebar.objects.all()
+        return render(request, 'accountApp/user.html', {'info': info, 'sidebar_items': sidebar_items})
 
     return render(request, 'accountApp/user.html')
 
@@ -206,7 +211,7 @@ def get_brs_info(request):
     student.student_name = soup.find('div', {'class': 'username'}).text
     student.schadule = schadule
     student.save()
-    return HttpResponseRedirect('/account/')
+    return HttpResponseRedirect('/account/get_sidebar.html')
 
 @login_required
 @transaction.atomic
@@ -225,17 +230,99 @@ def update_profile(request):
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
     if request.user.pk is not None:
-        student = Profile.objects.get(pk=request.user.pk)
-        schadule = student.schadule[2:-2].replace('"','').split(',')
-        if len(schadule) <= 1:
-            return render(request, 'accountApp/edit.html', {'schadule': [],
-                                                            'user_form': user_form, 'profile_form': profile_form})
-
-        else:
-            return render(request, 'accountApp/edit.html', {'schadule': schadule,
+        sidebar_items = Sidebar.objects.all()
+        return render(request, 'accountApp/edit.html', {'sidebar_items': sidebar_items,
                                                             'user_form': user_form, 'profile_form': profile_form})
 
     return render(request, 'accountApp/edit.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+@login_required
+def generate_sidebar(request):
+    user = request.user
+    student = Profile.objects.get(pk=request.user.pk)
+    schadule = student.schadule[2:-2].replace('"', '').split(',')
+    #settings = user.settings
+    settings = Settings.objects.get(pk=request.user.pk)
+    notes_url = settings.url_of_notes
+
+    for name in schadule:
+        try:
+            item = Sidebar.objects.get(name=name)
+            item.name = name
+            item.homework_link = notes_url
+            item.aims_link = notes_url
+            item.todo_link = notes_url
+            item.save()
+        except Sidebar.DoesNotExist as ex:
+            Sidebar.objects.create(name=name, homework_link=notes_url, aims_link=notes_url, todo_link=notes_url)
+
+    return HttpResponseRedirect('/')
+
+@login_required
+def settings_view(request):
+    sidebar_items = Sidebar.objects.all()
+    if request.method == 'POST':
+
+        settings_form = SettingsForm(request.POST, instance=request.user.settings)
+        sidebar_form = SidebarForm(request.POST)
+
+        if settings_form.is_valid() or sidebar_form.is_valid():
+
+            if settings_form.is_valid() and sidebar_form.is_valid():
+
+                disc_name = sidebar_form.cleaned_data['name']
+                sidebar_item = Sidebar.objects.get(name=disc_name)
+                sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
+                sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
+                sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
+
+                sidebar_item.save()
+                settings_form.save()
+
+                messages.success(request, ('Your profile was successfully updated!'))
+                return render(request,'accountApp/settings.html', {'settings_form': settings_form,
+                              'sidebar_form': sidebar_form, 'sidebar_items': sidebar_items})
+
+            elif settings_form.is_valid():
+                sidebar_form = SidebarForm()
+                messages.success(request, ('Your profile was successfully updated!'))
+                return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
+                                                                    'sidebar_form': sidebar_form,
+                                                                    'sidebar_items': sidebar_items})
+            else:
+
+                settings_form = SettingsForm(instance=request.user.settings,
+                                             initial={'url_of_notes': request.user.settings.url_of_notes,
+                                                      'url_of_disk': request.user.settings.url_of_disk})
+
+                disc_name = sidebar_form.cleaned_data['name']
+                sidebar_item = Sidebar.objects.get(name=disc_name)
+                sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
+                sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
+                sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
+                print(sidebar_item.name, sidebar_item.homework_link, sidebar_item.aims_link)
+                sidebar_item.save()
+
+                messages.success(request, ('Your profile was successfully updated!'))
+                return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
+                                                                    'sidebar_form': sidebar_form,
+                                                                    'sidebar_items': sidebar_items})
+
+        else:
+
+            messages.error(request, ('Please correct the error below.'))
+            return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
+                                                                'sidebar_form': sidebar_form,
+                                                                'sidebar_items': sidebar_items})
+
+    else:
+        settings_form = SettingsForm(instance=request.user.settings, initial={'url_of_notes': request.user.settings.url_of_notes,
+                            'url_of_disk': request.user.settings.url_of_disk})
+
+        sidebar_form = SidebarForm()
+        return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
+                                                            'sidebar_form': sidebar_form, 'sidebar_items': sidebar_items})
+

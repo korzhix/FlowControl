@@ -8,11 +8,8 @@
 </head>
 <body>
 <h1 style="color: white; background-color: black;">Введите ваши учетные данные sfedu</h1>
-<h1 style="color: white; background-color: black;">Введите ваши учетные данные sfedu</h1>
-<h1 style="color: white; background-color: black;">Введите ваши учетные данные sfedu</h1>
-<h1 style="color: white; background-color: black;">Введите ваши учетные данные sfedu</h1>
 
-<form method="post">
+<form method="post" action="/account/">
   {% csrf_token %}
   {{ user_form.as_p }}
   {{ profile_form.as_p }}
