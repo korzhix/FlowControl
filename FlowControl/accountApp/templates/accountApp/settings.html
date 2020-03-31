@@ -1,0 +1,19 @@
+{% extends "mainApp/wrapper.html" %}
+{% block content %}
+
+<h1>Настройки</h1>
+<form action="/account/settings.html" method="post">
+      {% csrf_token %}
+      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+      {{ settings_form.as_p }}
+      <button type="submit">Подтвердить</button>
+</form>
+
+<form action="/account/settings.html" method="post">
+      {% csrf_token %}
+      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+      {{ sidebar_form.as_p }}
+      <button type="submit">Подтвердить</button>
+</form>
+
+{% endblock %}
