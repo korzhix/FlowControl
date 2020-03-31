@@ -1,7 +1,13 @@
+.user_row{
+	background-color: rgba(8, 8, 8, 0.55);
+	padding-top: 30px;
+	margin-left: 20px;
+	height: 100%
+}
 .profile_img{
 	width: 165px;
 	height: 185px;
-	background-color: yellow;
+	object-fit: cover;
 }
 .profile_info, .profile_name, .exit{
 	color: white;
@@ -14,7 +20,6 @@
 }
 .exit:hover{
 	color: white;
-	
 }
 .edit, .google{
 	color: #ff9933;

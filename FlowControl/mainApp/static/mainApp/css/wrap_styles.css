@@ -187,6 +187,9 @@ iframe{
 	padding-left: 62px;
 
 }
+.disk-container{
+	height: 900px !important;
+}
 .changer_link{
 	color: #999999;
 }
