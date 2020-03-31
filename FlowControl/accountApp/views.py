@@ -192,19 +192,19 @@ def get_brs_info(request):
     for tag in student_info_tags[1:]:
         student_info.append(tag.text)
     student_info = str(student_info)
-    student_info = "'" + student_info.replace("'",'"') + "'"
+    student_info = student_info.replace("'",'"')
 
     schadule = str(schadule)
-    schadule = "'" + schadule.replace("'", '"') + "'"
+    schadule = schadule.replace("'", '"') 
 
     current = str(current)
-    current = "'" + current.replace("'", '"') + "'"
+    current = current.replace("'", '"')
 
     current_max = str(current_max)
-    current_max = "'" + current_max.replace("'", '"') + "'"
+    current_max = current_max.replace("'", '"')
 
     absolute_max = str(absolute_max)
-    absolute_max = "'" + absolute_max.replace("'", '"') + "'"
+    absolute_max = absolute_max.replace("'", '"')
 
     student.current_scores = current
     student.current_max_scores = current_max
@@ -246,7 +246,7 @@ def update_profile(request):
 def generate_sidebar(request):
 
     student = Profile.objects.get(pk=request.user.pk)
-    schadule = student.schadule[2:-2].replace('"', '').split(',')
+    schadule = student.schadule[1:-1].replace('"', '').split(',')
     settings = Settings.objects.get(pk=request.user.pk)
     notes_url = settings.url_of_notes
     Sidebar.objects.all().delete()
