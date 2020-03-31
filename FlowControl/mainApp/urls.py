@@ -22,7 +22,7 @@ from django.urls import include
 from . import views
 
 urlpatterns = [
-	path('', views.index, name="index"),
+	path('', views.disk_page, name="index"),
 	path('notes.html',views.display_notes),
 	path('disk.html', views.disk_page, name="disk_page"),
 	path('brs.html', views.brs_view),
