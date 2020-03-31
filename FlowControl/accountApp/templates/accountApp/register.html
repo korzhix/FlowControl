@@ -1,19 +1,25 @@
-{% extends "mainApp/wrapper.html" %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+    {% load static %}
+	<link rel="stylesheet" href="{% static 'mainApp/css/wrapper_styles.css' %}" type="text/css">
 </head>
 <body>
-<h1 style="color: white; background-color: black;">Log-in</h1>
-<form action="" method="post">
-      {% csrf_token %}
-      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
-      {{ form.as_p }}
-      <button type="submit">Зарегистрироваться</button>
-</form>
+	<form action="" method="post">
+		<div class="field_log">
+			{% csrf_token %}
+		    <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+		    {{ form.as_p }}
+		    <button class="but-log" type="submit">Зарегистрироваться</button>
+		</div>
+	    
+	</form>
+	{% load static %}
+	<script src="{% static 'accountApp/js/user_script.js' %}"></script>
 </body>
 </html>
 {% endblock %}

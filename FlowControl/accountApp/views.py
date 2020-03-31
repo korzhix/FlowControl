@@ -1,8 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import SfeduStuden
-from .forms import LoginForm
-from django.contrib import auth
+from .models import Profile
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
@@ -10,11 +7,18 @@ from django.views.generic.base import View
 from django.contrib.auth import logout
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404
+from .forms import ProfileForm
+from .forms import UserForm
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
 class RegisterFormView(FormView):
+    # form_class = UserCreationForm
     form_class = UserCreationForm
-
     # Ссылка, на которую будет перенаправляться пользователь в случае успешной регистрации.
     # В данном случае указана ссылка на страницу входа для зарегистрированных пользователей.
     success_url = "/"
@@ -46,7 +50,7 @@ class LoginFormView(FormView):
     def form_valid(self, form):
         # Получаем объект пользователя на основе введённых в форму данных.
         self.user = form.get_user()
-
+        #student = Profile()
         # Выполняем аутентификацию пользователя.
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
@@ -63,3 +67,28 @@ class LogoutView(View):
 
 def user_login(request):
     return render(request, 'accountApp/user.html')
+
+@login_required
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, ('Your profile was successfully updated!'))
+            return redirect('/')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'accountApp/edit.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+
+@login_required
+def get_brs(request):
+    pass

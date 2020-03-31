@@ -25,3 +25,23 @@ $( ".header-link" ).click(function() {
 	};
 
 });
+
+const nextPage = (event) => {
+	if (event.target.classList[0] == "far" || event.target.classList[0] == "header-link"){
+		if (event.target.classList[0] == "far") {
+			localStorage['menuId'] = event.target.parentNode.id;
+		}else {
+			localStorage['menuId'] = event.target.id;
+		};s
+		console.log(localStorage['menuId']);
+
+	};
+};
+if (document.location.pathname === '/'){
+	localStorage['menuId'] = '2';
+}else{
+	$(".header-link").removeClass('header-link-active');
+	$('#' + localStorage['menuId']).addClass("header-link-active");
+
+};
+document.addEventListener('click', nextPage);

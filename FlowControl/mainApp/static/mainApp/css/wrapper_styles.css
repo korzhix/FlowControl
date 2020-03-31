@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 .container-fluid{
 	padding: 0;
 }
@@ -66,7 +65,7 @@
 /*
 for test
 */
-.col-10{
+.col-md-10{
 	width: 1000px;
 	height: 1000px;
 	padding: 0;
@@ -74,17 +73,17 @@ for test
 	padding-left: 8px;
 	padding-bottom: 30px;
 }
-.col-2{
+.col-md-2{
 	margin-top: 1px;
 	padding: 0;
 }
-.col-10 > .container{
+.col-md-10 > .container{
 	background-color: white;
 	width: 100%;
-	height: 900px;
+	height: 100%;
 	padding: 0;
 }
-.col-2 > .container{
+.col-md-2 > .container{
 	background-color: #191818;
 	width: 100%;
 	height: 100%;
@@ -167,9 +166,6 @@ for test
 
 
 
-
-
-
 iframe{
 	border-width: 0;
 }
@@ -202,6 +198,13 @@ iframe{
 	padding: 0 10px;
 }
 
+.brs_container{
+	padding-top: 20px !important;
+}
+#myChart2{
+	padding-top: 20px !important;
+	padding-bottom: 50px;
+}
 
 .footer{
 	height: 75px;
@@ -215,6 +218,77 @@ iframe{
 .footer > .container{
 	margin: 0 auto;
 }
+
+
+/* Страница пользователя */
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    background-color: transparent;
+    outline: none;
+}
+.helptext, .field_log > ul, .field_log > p > label{
+	display: none;
+}
+.sign_nav{
+	margin-top: 60px;
+	justify-content: center;
+}
+.sign-link{
+	font-size: 24px;
+	color: white;
+	font-weight: 700;
+	padding: 5px 0;
+	margin: 0 20px;
+}
+.sign-link:hover{
+	color: white;
+}
+.sign-link-active{
+	border-bottom: 2px solid #ffcc33;
+}
+
+#id_password, #id_password1, #id_password2, #id_username{
+	background: none;
+	border: none;
+	border-bottom: 1px solid white;
+	width: 350px;
+	height: 30px;
+	margin-bottom: 60px;
+	color: white;
+	font-size: 18px;
+}
+#id_password:hover, #id_password1:hover, #id_password2:hover, #id_username:hover{
+	outline: none;
+
+}
+#id_password::placeholder-shown{
+	content: "Пароль";
+}
+
+.but-log{
+	padding: 13px 50px;
+	background-color: #CC6633;
+	border-radius: 25% 0;
+	border: none;
+	outline: none;
+	margin-top: 40px;
+	color: white;
+	font-size: 18px;
+	font-weight: 700;
+	text-transform: uppercase;
+
+}
+.but-log:focus{
+	outline: none;
+}
+.field_log{
+	text-align: center;
+}
+
+
 
 
 
