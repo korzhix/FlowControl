@@ -279,7 +279,7 @@ input:-webkit-autofill {
 	font-size: 18px;
 }
 #id_password:hover, #id_password1:hover, #id_password2:hover, #id_username:hover{
-	outline: none;
+	
 
 }
 #id_password::placeholder-shown{
