@@ -1,0 +1,251 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Дисциплины | Сервис БРС</title><meta http-equiv="Cache-Control" content="no-cache"><link href='https://fonts.googleapis.com/css?family=PT+Sans&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'><link type="text/css" href="/static/css/common.css" rel="stylesheet" /><link type="text/css" href="/static/css/support/imgUpload.css" rel="stylesheet" /><link type="text/css" href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" /><script type="text/javascript" src="/static/js/libs/jquery-1.11.1.min.js"></script><script type="text/javascript" src="/static/js/config.js"></script><script type="text/javascript" src="/static/js/wnd/wnd.js"></script><script type="text/javascript" src="/static/js/event_inspector/eventInspector.js"></script><script type="text/javascript" src="/static/js/supportDialog.js"></script><script type="text/javascript" src="/static/js/semesterSwitcher.js"></script><script type="text/javascript" src="/static/js/recordBookSwitcher.js"></script><script type="text/javascript" src="/static/js/profile.js"></script><script type="text/javascript" src="/static/js/settings.js"></script><script type="text/javascript" src="/static/js/libs/jquery.placeholder.js"></script><script>
+		$(function() {
+			$('input, textarea').placeholder();
+		});
+
+        User = {
+            login: "",
+			accountid: 38407,
+        };
+    </script><style>
+		.fa-bg {
+			font-size: 1.5em;
+			line-height: 0.75em;
+			vertical-align: -15%;
+		}
+		.fa-md {
+			font-size: 1.2em;
+			line-height: 0.75em;
+			vertical-align: -10%;
+		}
+	</style>
+	<link type="text/css" href="/static/css/student/index.css" rel="stylesheet" />
+	<link type="text/css" href="/static/css/circles.css" rel="stylesheet" />
+	<script type="text/javascript" src="/static/js/student/index.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div id="wrap" class="page">
+	<div id="errButton">
+	<div id="errButton_img">
+
+	</div>
+	</div>
+	<div class="header_wrapper">
+		<div class="logotype alignLeft">
+			<a href="/" title="Перейти на главную">
+				<i class="fa fa-home fa-bg fa-fw"></i>
+				&nbsp;<span>Сервис БРС</span></a>
+		</div>
+		<div class="semesterLayer">
+			<a href="#" id="changeSemester" class="semesterChanger" title="Сменить семестр">
+				<span class="semesterChangerTitle">Семестр:</span>
+				<span class="semesterChangerSelection">Весна 2020</span>
+				<i class="fa fa-angle-down"></i>
+			</a>
+			<div class="semesterSwitcherBtn">
+				<div class="semesterSwitcher" id="semester_12" style="display: none;">
+					<ul>
+						<li>
+							<a href="#" id="S-12" class="switchSemester">Весна 2020</a>
+						</li>
+						<li>
+							<a href="#" id="S-11" class="switchSemester">Осень 2019</a>
+						</li>
+						<li>
+							<a href="#" id="S-10" class="switchSemester">Весна 2019</a>
+						</li>
+						<li>
+							<a href="#" id="S-9" class="switchSemester">Осень 2018</a>
+						</li>
+						<li>
+							<a href="#" id="S-8" class="switchSemester">Весна 2018</a>
+						</li>
+						<li>
+							<a href="#" id="S-7" class="switchSemester">Осень 2017</a>
+						</li>
+						<li>
+							<a href="#" id="S-6" class="switchSemester">Весна 2017</a>
+						</li>
+						<li>
+							<a href="#" id="S-5" class="switchSemester">Осень 2016</a></li>
+						<li>
+							<a href="#" id="S-4" class="switchSemester">Весна 2016</a>
+						</li>
+						<li>
+							<a href="#" id="S-3" class="switchSemester">Осень 2015</a>
+						</li>
+						<li>
+							<a href="#" id="S-2" class="switchSemester">Весна 2015</a>
+						</li>
+						<li>
+							<a href="#" id="S-1" class="switchSemester">Осень 2014</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="navigation">
+			<div class="recordBookLayer">
+				<a href="#" id="changeRecordBook" class="recordBookChanger" title="Сменить зачетку">
+					<span class="recordBookChangerTitle">Зачетка:</span>
+					<span class="recordBookChangerSelection">ММ-19-0141</span>
+					<i class="fa fa-angle-down">
+
+					</i>
+				</a>
+				<div class="recordBookSwitcherBtn">
+					<div class="recordBookSwitcher" id="recordBook_1594292" style="display: none;">
+						<ul>
+							<li>
+								<a href="#" id="R-1594292" class="switchRecordBook">ММ-19-0141</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="username">Александр Корж</div>
+			<a href="/sign/out" title="Выход">
+				<i class="fa fa-sign-out fa-bg fa-fw">
+
+				</i>
+			</a>
+		</div>
+	</div>
+	<div class="profile_wrapper" id="profileInfo" style="display: none;">
+		<div class="clearFix">
+			<div class="username">Александр Александрович Корж</div>
+		</div>
+		<div class="clearFix">
+			<div class="label">Подразделение:</div>
+			<div class="content">Институт математики, механики и компьютерных наук</div>
+		</div>
+		<div class="clearFix">
+			<div class="label">Направление:</div>
+			<div class="content">Прикладная математика и информатика</div>
+		</div>
+		<div class="clearFix profile_delimeter">
+			<div class="label">Курс, группа:</div>
+			<div class="content">Бакалавриат, 1 курс, 1 группа</div>
+		</div>
+		<div class="clearFix">
+			<div class="label">Тип аккаунта:</div>
+			<div class="content">Студент</div>
+		</div>
+		<div class="clearFix">
+			<div class="label">Логин:</div>
+			<div class="content">
+			</div>
+		</div>
+		<div class="clearFix">
+			<div class="label">E-Mail:</div>
+			<div class="content">korzh@sfedu.ru</div>
+		</div>
+	</div>
+	<div class="main_layer">
+		<div class="main">
+			<div class="main_top">
+				<h3>
+						Дисциплины					</h3>
+			</div>
+			<div class="main_content sidePadding">
+				<div class="helpLink">
+					<a href="#" id="openHelp">Справка</a>
+				</div>
+				<table class="disciplinesList">
+					<tr class="tableHeader"><td>&nbsp;</td>
+						<td class="discTitle">Название учебной дисциплины</td>
+						<td>Преподаватели</td>
+						<td class="discControl">Форма аттестации</td>
+						<td>Текущие баллы</td>
+					</tr>
+					<tr class="disciplineRow">
+						<td class="discProgress">
+							<span title="Успеваемость по дисциплине" class="Circle ECTS-D">
+												66%
+									</span>
+						</td>
+						<td class="discTitle">
+							<a href="/student/discipline/31076">Алгебра и геометрия</a>
+						</td>
+						<td class="discTeachers">
+							<div>Иванова О. А.</div>
+							<div>Кряквин В. Д.</div>
+							<div>Левенштам В. Б.</div>
+							<div>Чернявская И. А.</div>
+						</td>
+						<td class="discControl">
+							Экзамен
+						</td>
+						<td class="discRating">
+							<span title="Текущая сумма баллов по дисциплине">20</span>
+		/
+							<span title="Максимально возможная на данный момент сумма баллов">30</span>
+		/
+							<span title="Максимально возможная сумма в этом семестре">100</span>
+						</td>
+					</tr>
+					<tr class="disciplineRow">
+						<td class="discProgress">
+							<span title="Успеваемость по дисциплине" class="Circle Undefined">
+							—
+					</span>
+						</td>
+						<td class="discTitle">
+							<a href="/student/discipline/36745">Иностранный язык</a></td><td class="discTeachers"><div>Грушко Е. И.</div></td><td class="discControl">
+		Экзамен
+	</td><td class="discRating"><span title="Текущая сумма баллов по дисциплине">0</span>
+		/
+		<span title="Максимально возможная на данный момент сумма баллов">0</span>
+		/
+		<span title="Максимально возможная сумма в этом семестре">100</span></td></tr><tr class="disciplineRow"><td class="discProgress"><span title="Успеваемость по дисциплине" class="Circle Undefined">
+							—
+					</span></td><td class="discTitle"><a href="/student/discipline/31080">Математическая логика и дискретная математика</a></td><td class="discTeachers"><div>Ерусалимский Я. М.</div><div>Штейнберг О. Б.</div></td><td class="discControl">
+		Экзамен
+	</td><td class="discRating"><span title="Текущая сумма баллов по дисциплине">0</span>
+		/
+		<span title="Максимально возможная на данный момент сумма баллов">0</span>
+		/
+		<span title="Максимально возможная сумма в этом семестре">100</span></td></tr><tr class="disciplineRow"><td class="discProgress"><span title="Успеваемость по дисциплине" class="Circle ECTS-C">
+												72%
+									</span></td><td class="discTitle"><a href="/student/discipline/31075">Математический анализ</a></td><td class="discTeachers"><div>Абанин А. В.</div><div>Андреева Т. М.</div><div>Иванова О. А.</div></td><td class="discControl">
+		Экзамен
+	</td><td class="discRating"><span title="Текущая сумма баллов по дисциплине">18</span>
+		/
+		<span title="Максимально возможная на данный момент сумма баллов">25</span>
+		/
+		<span title="Максимально возможная сумма в этом семестре">100</span></td></tr><tr class="disciplineRow"><td class="discProgress"><span title="Успеваемость по дисциплине" class="Circle Undefined">
+							—
+					</span></td><td class="discTitle"><a href="/student/discipline/31078">Дисциплины по физической культуре и спорту</a></td><td class="discTeachers"><div>Ковтуненко А. В.</div><div>Кожин В. В.</div><div>Олонец С. Б.</div></td><td class="discControl">
+		Зачет
+	</td><td class="discRating"><span title="Текущая сумма баллов по дисциплине">0</span>
+		/
+		<span title="Максимально возможная на данный момент сумма баллов">0</span>
+		/
+		<span title="Максимально возможная сумма в этом семестре">100</span></td></tr><tr class="disciplineRow"><td class="discProgress"><span title="Успеваемость по дисциплине" class="Circle ECTS-E">
+												62%
+									</span></td><td class="discTitle"><a href="/student/discipline/31077">Основы алгоритмизации и программирования</a></td><td class="discTeachers"><div>Долгих Т. Ф.</div><div>Мелехов А. П.</div><div>Полякова Н. М.</div><div>Филимонова А. М.</div></td><td class="discControl">
+		Зачет
+	</td><td class="discRating"><span title="Текущая сумма баллов по дисциплине">31</span>
+		/
+		<span title="Максимально возможная на данный момент сумма баллов">50</span>
+		/
+		<span title="Максимально возможная сумма в этом семестре">100</span></td></tr><tr class="disciplineRow"><td class="discProgress"><span title="Успеваемость по дисциплине" class="Circle Undefined">
+							—
+					</span></td><td class="discTitle"><a href="/student/discipline/31079">Проект 1 курса</a></td><td class="discTeachers"><div>Долгих Т. Ф.</div><div>Мелехов А. П.</div><div>Полякова Н. М.</div><div>Филимонова А. М.</div></td><td class="discControl">
+		Зачет
+	</td><td class="discRating"><span title="Текущая сумма баллов по дисциплине">0</span>
+		/
+		<span title="Максимально возможная на данный момент сумма баллов">0</span>
+		/
+		<span title="Максимально возможная сумма в этом семестре">100</span></td></tr><tr class="disciplineRow"><td class="discProgress"><span title="Успеваемость по дисциплине" class="Circle ECTS-A">
+												100%
+									</span></td><td class="discTitle"><a href="/student/discipline/31081">Физическая культура и спорт</a></td><td class="discTeachers"><div>Вассель С. С.</div></td><td class="discControl">
+		Зачет
+	</td><td class="discRating"><span title="Текущая сумма баллов по дисциплине">100</span>
+		/
+		<span title="Максимально возможная на данный момент сумма баллов">100</span>
+		/
+		<span title="Максимально возможная сумма в этом семестре">100</span></td></tr></table></div></div><div class="footer"><div class="altFooter"><span class = "attentionFooter"><a href="/instructions.pdf" title="Открыть руководство" class="attentionFooter" target="blank">Руководство пользователя Сервиса БРС (.pdf)</a> |
+        </span><a href="/order248.pdf" target="blank">Положение о порядке применения БРС (.pdf)</a> |
+                <a href="/faq" target="blank">ЧаВо (часто задаваемые вопросы)</a></div><div class="dev"><a href="https://vk.com/itlab_mmcs" target="_blank">IT-лаборатория мехмата ЮФУ © 2014 — 2020</a></div></div></div></div><div class="popup_overlay"><div class="popup"><div id='signin_f'><div class='auth_title'>Аутентификация</div><div class="auth_error">Неправильный логин или пароль!</div><div class='inputs'><div class="auth_form"><input type="text" id="login" name="login" placeholder="Логин или E-Mail" value=""></div><div class="auth_form"><input type="password" id="password" name="password" placeholder="Пароль" value=""></div></div><!--    --><div class="auth_form"><input type="button" id="signin_b" name="button" value="Войти"></div></div><div class='actiongrid'><a href="/sign/in">Вход через OpenID</a> | <a href="/sign/up">Активировать аккаунт</a> | <a href="/remind">Забыли пароль?</a></div></div></div></body></html>
