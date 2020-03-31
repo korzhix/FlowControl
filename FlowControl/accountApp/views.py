@@ -261,7 +261,7 @@ def settings_view(request):
     if request.method == 'POST':
 
         settings_form = SettingsForm(request.POST, instance=request.user.settings)
-        sidebar_form = SidebarForm(request.POST)
+        sidebar_form = SidebarForm(request.POST, initial={'homework_link'})
 
         if settings_form.is_valid() or sidebar_form.is_valid():
 
