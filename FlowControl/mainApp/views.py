@@ -14,12 +14,35 @@ def disk_page(request):
 
 	return render(request, 'mainApp/disk.html')
 
+@login_required
 def display_notes(request):
 	if request.user.pk is not None:
 		settings = Settings.objects.get(pk=request.user.pk)
 		notes_url = settings.url_of_notes
 		sidebar_items = Sidebar.objects.all()
-		return render(request, 'mainApp/notes.html', {'notes_url': notes_url, 'sidebar_items': sidebar_items})
+		url = str(request.get_full_path())
+		print(url)
+		start_index =url.find('link=') + len('link=')
+
+		if start_index != len('link=') -1:
+			url = url[start_index:]
+			print(url)
+			if url == notes_url:
+				item_name = 'Заметки'
+			else:
+
+				try:
+					item = Sidebar.objects.get(homework_link=url)
+					item_name = item.name
+					notes_url = url
+				except Sidebar.DoesNotExist:
+					item_name = 'Заметки'
+				except Sidebar.MultipleObjectsReturned:
+					item_name = 'Заметки'
+		else:
+			item_name = 'Заметки'
+		return render(request, 'mainApp/notes.html', {'notes_url': notes_url, 'item_name': item_name,
+													  'sidebar_items': sidebar_items})
 
 	return render(request, 'mainApp/notes.html')
 

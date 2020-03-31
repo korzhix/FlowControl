@@ -71,11 +71,22 @@ class LogoutView(View):
 def user_page(request):
     if request.user.pk is not None:
         student = Profile.objects.get(pk=request.user.pk)
-        info = student.student_info
+        info = str(student.student_info)[2:-2].split('",')
+        print(info)
         if info == 'empty':
             info = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
             sidebar_items = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
         else:
+            labels = []
+            contents = []
+            for i in range(len(info)):
+                info[i] = info[i].replace('"', '')
+                label = info[i].split(':')[0]
+                content = info[i].split(':')[1]
+                print(label, content, sep='|||')
+                labels.append(label)
+                contents.append(content)
+            info = zip(labels, contents)
             sidebar_items = Sidebar.objects.all()
         return render(request, 'accountApp/user.html', {'info': info, 'sidebar_items': sidebar_items})
 
@@ -261,7 +272,7 @@ def settings_view(request):
     if request.method == 'POST':
 
         settings_form = SettingsForm(request.POST, instance=request.user.settings)
-        sidebar_form = SidebarForm(request.POST)
+        sidebar_form = SidebarForm(request.POST, initial={'homework_link'})
 
         if settings_form.is_valid() or sidebar_form.is_valid():
 
