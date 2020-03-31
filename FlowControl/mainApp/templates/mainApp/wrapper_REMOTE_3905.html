@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta name="google-site-verification" content="AnIwShVBj-HMYOEbrVZZT6U7fLbpVMX4vUZCZqyG3d4" />
+
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'mainApp/css/wrap_styles.css' %}" type="text/css">
+	<!-- link fontawesome to svg format -->
+	<script src="https://kit.fontawesome.com/1bf9561790.js" crossorigin="anonymous"></script>
+	<!-- link chartJs-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="header">
+			<div class="container head-cont">
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav row header-list">
+							<li class="header-item nav-item col-lg-2">
+						    	<a class="header-link nav-link" href="#" id="0">
+						    		<i class="far fa-calendar-alt"></i>
+						    		Расписание
+						    	</a>
+						    </li>
+						    <li class="header-item nav-item col-lg-2" >
+						    	<a class="header-link nav-link" href="#" id="1">
+						    		<i class="far fa-chart-bar"></i>
+						    		БРС
+						    	</a>
+						    </li>
+						    <li class="header-item nav-item col-lg-2" >
+						    	<a class="header-link nav-link header-link-active" href="/disk.html" id="2">
+						    		<i class="far fa-window-restore"></i>
+						    		Диск
+						    	</a>
+						    </li>
+						    <li class="header-item nav-item col-lg-2">
+						    	<a class="header-link nav-link" href="#"  id="3">
+						    		<i class="fas fa-th-large"></i>
+						    		Справка
+						    	</a>
+						    </li>
+							<li class="header-item nav-item offset-lg-2 col-lg-2" >
+						    	<a class="header-link nav-link" href="/account/" id="4">
+						    		<i class="far fa-user"></i>
+						    		Профиль
+						    	</a>
+						    </li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="main">
+			<div class="container">
+				<div class="row">
+					<div class="col-2">
+						<div class="container">
+							{% if user.is_authenticated %}
+							<ul class="sidebar">
+								<li class="sidebar-item down">
+									<a class="sidebar-item-link" href="#">История</a>
+									<ul class="submenu">
+										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
+									</ul>
+								</li>
+								<li class="sidebar-item down">
+									<a class="sidebar-item-link" href="#">Математический Анализ</a>
+									<ul class="submenu">
+										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
+									</ul>
+								</li>
+								<li class="sidebar-item down">
+									<a class="sidebar-item-link" href="#">Алгебра и Геометрия</a>
+									<ul class="submenu">
+										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
+									</ul>
+								</li>
+								<li class="sidebar-item down">
+									<a class="sidebar-item-link" href="#">Дискретная Математика</a>
+									<ul class="submenu">
+										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
+									</ul>
+								</li>
+								<li class="sidebar-item down">
+									<a class="sidebar-item-link" href="#">Основы Алгоритмизации и Программирования</a>
+									<ul class="submenu">
+										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
+									</ul>
+								</li>
+								<li class="sidebar-item down">
+									<a class="sidebar-item-link" href="#">Английский язык</a>
+									<ul class="submenu">
+										<li class="submenu-item"><a class="sidebar-link" href="#">Домашнее задание</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Календарь</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">Цели</a></li>
+										<li class="submenu-item"><a class="sidebar-link" href="#">To do</a></li>
+									</ul>
+								</li>
+							</ul>
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-10">
+						{% block content %}
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="row container">
+				<div class="col-4">
+					<p class="footer_description">Наша группа</p>
+				</div>
+				<div class="col-4">
+					<p class="footer_description">Наша команда</p>
+				</div>
+				<div class="col-4">
+					<p class="footer_description">Наше что-то</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	{% load static %}
+	<script src="{% static 'mainApp/js/wrap_script.js' %}"></script>
+	<script src="{% static 'mainApp/js/stat_script.js' %}"></script>
+</body>
+</html>
