@@ -2,15 +2,25 @@ let ctx = document.getElementById('myChart1').getContext('2d');
 let ctx2 = document.getElementById('myChart2').getContext('2d');
 
 // Прием данных
-    
 
+let subjects = document.getElementsByClassName('schadule-string')[0];
+subjects = subjects.innerHTML.trim();
+subjects = JSON.parse(subjects);
+
+let current_balls = document.getElementsByClassName('current-scores-string')[0];
+current_balls = current_balls.innerHTML.trim();
+current_balls = JSON.parse(current_balls);
+
+let max_balls = document.getElementsByClassName('max-current-scores-string')[0];
+max_balls = max_balls.innerHTML.trim();
+max_balls = JSON.parse(max_balls);
 
 // Обработка данных
-
-let subjects = ['История', 'Мат. анализ', 'Физ-ра', 'АиГ', 'ОАиП', 'МЛиДМ', 'Англ. язык'];
-let current_balls = [40, 16, 16, 31, 42, 40, 31];
-let max_balls = [50, 30, 40, 35, 42, 45, 35];
-
+/*
+for(let i = 0; i < current_balls.length; i++){
+    current_balls[i] = Number.parseInt(current_balls[i]);
+    max_balls[i] = Number.parseInt(max_balls[i]);
+}
 let lost_balls = [];
 for (let i = 0; i < max_balls.length; i++){
     lost_balls.push(-(max_balls[i]-current_balls[i]));
@@ -95,4 +105,4 @@ let myChartBar = new Chart(ctx2, {
             }]
         }
     }
-});
+}); */
