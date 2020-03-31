@@ -48,7 +48,7 @@ class LoginFormView(FormView):
     template_name = "accountApp/login.html"
 
     # В случае успеха перенаправим на главную.
-    success_url = "/"
+    success_url = "/account/"
 
     def form_valid(self, form):
         # Получаем объект пользователя на основе введённых в форму данных.
@@ -211,7 +211,7 @@ def get_brs_info(request):
     student.student_name = soup.find('div', {'class': 'username'}).text
     student.schadule = schadule
     student.save()
-    return HttpResponseRedirect('/account/get_sidebar.html')
+    return HttpResponseRedirect('/account/generate_sidebar.html')
 
 @login_required
 @transaction.atomic
@@ -241,23 +241,14 @@ def update_profile(request):
 
 @login_required
 def generate_sidebar(request):
-    user = request.user
+
     student = Profile.objects.get(pk=request.user.pk)
     schadule = student.schadule[2:-2].replace('"', '').split(',')
-    #settings = user.settings
     settings = Settings.objects.get(pk=request.user.pk)
     notes_url = settings.url_of_notes
-
+    Sidebar.objects.all().delete()
     for name in schadule:
-        try:
-            item = Sidebar.objects.get(name=name)
-            item.name = name
-            item.homework_link = notes_url
-            item.aims_link = notes_url
-            item.todo_link = notes_url
-            item.save()
-        except Sidebar.DoesNotExist as ex:
-            Sidebar.objects.create(name=name, homework_link=notes_url, aims_link=notes_url, todo_link=notes_url)
+        Sidebar.objects.create(name=name, homework_link=notes_url, aims_link=notes_url, todo_link=notes_url)
 
     return HttpResponseRedirect('/')
 
