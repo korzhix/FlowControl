@@ -1,43 +1,25 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from accountApp.models import Profile
+from accountApp.models import Settings
+from accountApp.models import Sidebar
 # Create your views here.
-
-def index(request):
-	if request.user.pk is not None:
-		student = Profile.objects.get(pk=request.user.pk)
-		schadule = student.schadule[2:-2].replace('"','').split(',')
-		if len(schadule) <= 1:
-			return render(request, 'mainApp/disk.html', {'schadule': []})
-
-		else:
-			return render(request, 'mainApp/disk.html', {'schadule': schadule[1:]})
-
-	return render(request, 'mainApp/disk.html', {})
-
-	return render(request, 'mainApp/disk.html')
 
 def disk_page(request):
 	if request.user.pk is not None:
-		student = Profile.objects.get(pk=request.user.pk)
-		schadule = student.schadule[2:-2].replace('"','').split(',')
-		if len(schadule) <= 1:
-			return render(request, 'mainApp/disk.html', {'schadule': []})
-
-		else:
-			return render(request, 'mainApp/disk.html', {'schadule': schadule[1:]})
+		settings = Settings.objects.get(pk=request.user.pk)
+		disk_url = settings.url_of_disk
+		sidebar_items = Sidebar.objects.all()
+		return render(request, 'mainApp/disk.html', {'disk_url': disk_url, 'sidebar_items': sidebar_items})
 
 	return render(request, 'mainApp/disk.html')
 
 def display_notes(request):
 	if request.user.pk is not None:
-		student = Profile.objects.get(pk=request.user.pk)
-		schadule = student.schadule[2:-2].replace('"','').split(',')
-		if len(schadule) <= 1:
-			return render(request, 'mainApp/notes.html', {'schadule': []})
-
-		else:
-			return render(request, 'mainApp/notes.html', {'schadule': schadule[1:]})
+		settings = Settings.objects.get(pk=request.user.pk)
+		notes_url = settings.url_of_notes
+		sidebar_items = Sidebar.objects.all()
+		return render(request, 'mainApp/notes.html', {'notes_url': notes_url, 'sidebar_items': sidebar_items})
 
 	return render(request, 'mainApp/notes.html')
 
@@ -48,5 +30,6 @@ def brs_view(request):
 	current = student.current_scores
 	max_current = student.current_max_scores
 	absolute_max = student.absolute_max_scores
+	sidebar_items = Sidebar.objects.all()
 	return render(request, 'mainApp/brs.html', {'schadule': schadule, 'max_current': max_current,
-												'current': current, 'absolute_max': absolute_max, })
+												'current': current, 'absolute_max': absolute_max, 'sidebar_items': sidebar_items})

@@ -71,9 +71,9 @@
 							<ul class="sidebar">
 
 
-								{% for subject in schadule %}
+								{% for item in sidebar_items %}
 								<li class="sidebar-item down">
-									<a class="sidebar-item-link" href="#">{{ subject }}</a>
+									<a class="sidebar-item-link" href="#">{{ item.name }}</a>
 									<ul class="submenu">
 										<li class="submenu-item"><a class="sidebar-link" href="/notes.html">Домашнее задание</a></li>
 										<li class="submenu-item"><a class="sidebar-link" href="/notes.html">Календарь</a></li>
