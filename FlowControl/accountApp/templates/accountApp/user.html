@@ -14,8 +14,13 @@
             
         </div>
         <div class="offset-1 col-7">
-            <h3 class="profile_name">{{user.username}}</h3>
-             <p class="profile_info">{{ info }}</p>
+            <h3 class="profile_name" >{{user.profile.student_name}}</h3>
+            {% for label, content in info %}
+                <h4 class="profile_info">{{ label }}</h4>
+                <p class="profile_info" style="font-size:18px;">{{ content }}</p>
+            {% empty %}
+                <pclass="profile_info">Заполните учетные данные ЛК ЮФУ для подробной информации.</p>
+            {% endfor %}
         </div>
         <div class="offset-1 col-3">
             <a class="google" href='{% url "social:begin" "google-oauth2" %}'>Sign up with Google</a>

@@ -30,16 +30,15 @@ def display_notes(request):
 			if url == notes_url:
 				item_name = 'Заметки'
 			else:
-				for i in range(3):
-					try:
-						item = Sidebar.objects.get(homework_link=url)
-						item_name = item.name
-						notes_url = url
-						print(item_name)
-					except Sidebar.DoesNotExist:
-						item_name = 'Заметки'
-					except Sidebar.MultipleObjectsReturned:
-						item_name = 'Заметки'
+
+				try:
+					item = Sidebar.objects.get(homework_link=url)
+					item_name = item.name
+					notes_url = url
+				except Sidebar.DoesNotExist:
+					item_name = 'Заметки'
+				except Sidebar.MultipleObjectsReturned:
+					item_name = 'Заметки'
 		else:
 			item_name = 'Заметки'
 		return render(request, 'mainApp/notes.html', {'notes_url': notes_url, 'item_name': item_name,
