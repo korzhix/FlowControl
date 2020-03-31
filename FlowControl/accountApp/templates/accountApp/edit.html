@@ -9,7 +9,7 @@
 <body>
 <h1 style="color: white; background-color: black;">Введите ваши учетные данные sfedu</h1>
 
-<form method="post" action="/account/syn_brs.html">
+<form method="post" action="/account/sync_brs.html">
   {% csrf_token %}
   {{ user_form.as_p }}
   {{ profile_form.as_p }}
