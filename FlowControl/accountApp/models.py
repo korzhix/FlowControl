@@ -37,11 +37,11 @@ class Settings(models.Model):
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
-            Profile.objects.create(user=instance)
+            Settings.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+        instance.settings.save()
 
 class Sidebar(models.Model):
     student = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
@@ -50,14 +50,5 @@ class Sidebar(models.Model):
     homework_link = models.URLField(max_length=500, default='#')
     aims_link = models.URLField(max_length=500, default='#')
     todo_link = models.URLField(max_length=500, default='#')
-
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
 
 
