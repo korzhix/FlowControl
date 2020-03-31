@@ -269,28 +269,60 @@ def settings_view(request):
         settings_form = SettingsForm(request.POST, instance=request.user.settings)
         sidebar_form = SidebarForm(request.POST)
 
-        if settings_form.is_valid() and sidebar_form.is_valid():
+        if settings_form.is_valid() or sidebar_form.is_valid():
 
-            disc_name = sidebar_form.cleaned_data['name']
-            sidebar_item = Sidebar.objects.get(name=disc_name)
-            sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
-            sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
-            sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
+            if settings_form.is_valid() and sidebar_form.is_valid():
 
-            items.save()
-            settings_form.save()
+                disc_name = sidebar_form.cleaned_data['name']
+                sidebar_item = Sidebar.objects.get(name=disc_name)
+                sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
+                sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
+                sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
 
-            messages.success(request, ('Your profile was successfully updated!'))
-            return render(request,'accountApp/settings.html', {'settings_form': settings_form,
-                          'sidebar_form': sidebar_form, 'sidebar_items': sidebar_items})
+                sidebar_item.save()
+                settings_form.save()
+
+                messages.success(request, ('Your profile was successfully updated!'))
+                return render(request,'accountApp/settings.html', {'settings_form': settings_form,
+                              'sidebar_form': sidebar_form, 'sidebar_items': sidebar_items})
+
+            elif settings_form.is_valid():
+                sidebar_form = SidebarForm()
+                messages.success(request, ('Your profile was successfully updated!'))
+                return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
+                                                                    'sidebar_form': sidebar_form,
+                                                                    'sidebar_items': sidebar_items})
+            else:
+
+                settings_form = SettingsForm(instance=request.user.settings,
+                                             initial={'url_of_notes': request.user.settings.url_of_notes,
+                                                      'url_of_disk': request.user.settings.url_of_disk})
+
+                disc_name = sidebar_form.cleaned_data['name']
+                sidebar_item = Sidebar.objects.get(name=disc_name)
+                sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
+                sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
+                sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
+                print(sidebar_item.name, sidebar_item.homework_link, sidebar_item.aims_link)
+                sidebar_item.save()
+
+                messages.success(request, ('Your profile was successfully updated!'))
+                return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
+                                                                    'sidebar_form': sidebar_form,
+                                                                    'sidebar_items': sidebar_items})
+
         else:
+
             messages.error(request, ('Please correct the error below.'))
+            return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
+                                                                'sidebar_form': sidebar_form,
+                                                                'sidebar_items': sidebar_items})
+
     else:
         settings_form = SettingsForm(instance=request.user.settings, initial={'url_of_notes': request.user.settings.url_of_notes,
                             'url_of_disk': request.user.settings.url_of_disk})
 
         sidebar_form = SidebarForm()
-        #sidebar_form.get_choices()
         return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
                                                             'sidebar_form': sidebar_form, 'sidebar_items': sidebar_items})
 
