@@ -220,6 +220,13 @@ iframe{
 }
 
 
+/*  BRS  */
+
+.schadule-string, .current-scores-string, .max-current-scores-string, .absolute-max-scores-line{
+	display: none;
+}
+
+
 /* Страница пользователя */
 
 input:focus,
@@ -228,6 +235,17 @@ textarea:focus,
 button:focus {
     background-color: transparent;
     outline: none;
+}
+@-webkit-keyframes autofill {
+  to {
+    color: white;
+    background: transparent;
+  }
+}
+ 
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
 }
 .helptext, .field_log > ul, .field_log > p > label{
 	display: none;
