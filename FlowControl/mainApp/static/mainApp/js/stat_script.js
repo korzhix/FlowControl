@@ -3,13 +3,13 @@ let ctx2 = document.getElementById('myChart2').getContext('2d');
 
 // Прием данных
 
-let subjects = document.getElementsByClassName('schadule-string');
+let subjects = document.getElementsByClassName('schadule-string')[0];
 subjects = JSON.parse(subjects);
 
-let current_balls = document.getElementsByClassName('current-scores-string');
+let current_balls = document.getElementsByClassName('current-scores-string')[0];
 current_balls = JSON.parse(current_balls);
 
-let max_balls = document.getElementsByClassName('max-current-scores-string');
+let max_balls = document.getElementsByClassName('max-current-scores-string')[0];
 max_balls = JSON.parse(max_balls);
 
 
