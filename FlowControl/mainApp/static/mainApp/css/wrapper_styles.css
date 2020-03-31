@@ -306,6 +306,11 @@ input:-webkit-autofill {
 }
 
 
+.wrap{
+	margin: 0 200px;
+    padding-bottom: 20px;
+    background-color: rgba(8,8,8, 0.8);
+}
 
 
 
