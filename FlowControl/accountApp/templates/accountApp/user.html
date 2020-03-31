@@ -21,7 +21,7 @@
             <a class="google" href='{% url "social:begin" "google-oauth2" %}'>Sign up with Google</a>
         </div>
         <div class="offset-1 col-7">
-            <a class="edit" href="/edit.html">Ввести учетные данные openid</a>
+            <a class="edit" href="edit.html">Ввести учетные данные openid</a>
         </div>
     </div>
     
@@ -30,10 +30,10 @@
     {% else %}
     <ul class="nav sign_nav" id="myTab" role="tablist">
     	<li class="nav-item sign-item">
-    	    <a class="nav-link sign-link" id="in-tab" href="login.html">SIGN IN</a>
+    	    <a class="nav-link sign-link" id="in-tab" href="login.html">Авторизация</a>
     	</li>
     	<li class="nav-item sign-item">
-    	    <a class="nav-link sign-link" id="up-tab" href="register.html">SIGN UP</a>
+    	    <a class="nav-link sign-link" id="up-tab" href="register.html">Регистрация</a>
     	</li>
     </ul>
     {% endif %}
