@@ -16,7 +16,7 @@ max_balls = max_balls.innerHTML.trim();
 max_balls = JSON.parse(max_balls);
 
 // Обработка данных
-/*
+
 for(let i = 0; i < current_balls.length; i++){
     current_balls[i] = Number.parseInt(current_balls[i]);
     max_balls[i] = Number.parseInt(max_balls[i]);
@@ -105,4 +105,4 @@ let myChartBar = new Chart(ctx2, {
             }]
         }
     }
-}); */
+}); 
