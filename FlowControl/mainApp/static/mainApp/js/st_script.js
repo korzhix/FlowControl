@@ -5,18 +5,20 @@ let ctx2 = document.getElementById('myChart2').getContext('2d');
 
 let subjects = document.getElementsByClassName('schadule-string')[0];
 subjects = subjects.innerHTML.trim();
+console.log(subjects);
 subjects = JSON.parse(subjects);
-
+console.log(subjects);
+/*
 let current_balls = document.getElementsByClassName('current-scores-string')[0];
 current_balls = current_balls.innerHTML.trim();
 current_balls = JSON.parse(current_balls);
 
 let max_balls = document.getElementsByClassName('max-current-scores-string')[0];
 max_balls = max_balls.innerHTML.trim();
-max_balls = JSON.parse(max_balls);
+max_balls = JSON.parse(max_balls);*/
 
 // Обработка данных
-
+/*
 for(let i = 0; i < current_balls.length; i++){
     current_balls[i] = Number.parseInt(current_balls[i]);
     max_balls[i] = Number.parseInt(max_balls[i]);
@@ -105,4 +107,4 @@ let myChartBar = new Chart(ctx2, {
             }]
         }
     }
-}); 
+}); */
