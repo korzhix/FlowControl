@@ -19,7 +19,7 @@ class SidebarForm(forms.Form):
     aims_link = forms.URLField()
     todo_link = forms.URLField()
 
-class ProfileForm(ModelForm):
+class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile

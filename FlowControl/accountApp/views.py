@@ -124,6 +124,7 @@ def get_brs_info(request):
     user = request.user
     #student_settings = Settings.objects.create(user=user)
     student = Profile.objects.get(pk=user.pk)
+    print(student.sfedu_pass,'ИИИ', student.sfedu_username)
     payload_to_login = {'openid_url': student.sfedu_username, 'password': student.sfedu_pass}
 
     headers_to_login = {
@@ -182,6 +183,7 @@ def get_brs_info(request):
         absolute_max.append(spans[2].text)
 
     if len(schadule) <= 1:
+        print(student.sfedu_username + student.sfedu_pass)
         return HttpResponse('Для синхронизации с БРС необходимо заполнить учетные данные SFEDU')
 
     student_info_tags = list(soup.find('div', {'id': 'profileInfo'}))
@@ -220,10 +222,11 @@ def update_profile(request):
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
+            print('BBBB')
             user_form.save()
             profile_form.save()
             messages.success(request, ('Your profile was successfully updated!'))
-            return redirect('/')
+            return redirect('sync_brs.html')
         else:
             messages.error(request, ('Please correct the error below.'))
     else:

@@ -10,7 +10,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     sfedu_pass = models.CharField(max_length=50)
-    sfedu_username = models.CharField(max_length=500,default='Студент')
+    sfedu_username = models.CharField(max_length=500, default='login')
     schadule = models.CharField(max_length=5000, default='empty')
     student_name = models.CharField(max_length=5000, default='empty')
     current_scores = models.CharField(max_length=5000, default='empty')
