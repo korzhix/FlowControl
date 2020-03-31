@@ -32,13 +32,13 @@ const nextPage = (event) => {
 			localStorage['menuId'] = event.target.parentNode.id;
 		}else {
 			localStorage['menuId'] = event.target.id;
-		};s
-		console.log(localStorage['menuId']);
-
+		};
 	};
 };
 if (document.location.pathname === '/'){
 	localStorage['menuId'] = '2';
+	$(".header-link").removeClass('header-link-active');
+	$('#' + localStorage['menuId']).addClass("header-link-active");
 }else{
 	$(".header-link").removeClass('header-link-active');
 	$('#' + localStorage['menuId']).addClass("header-link-active");
