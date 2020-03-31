@@ -1,0 +1,28 @@
+.profile_img{
+	width: 165px;
+	height: 185px;
+	background-color: yellow;
+}
+.profile_info, .profile_name, .exit{
+	color: white;
+}
+.exit{
+	display: block;
+	text-decoration: none;
+	padding-top: 5px;
+	margin-bottom: 40px;
+}
+.exit:hover{
+	color: white;
+	
+}
+.edit, .google{
+	color: #ff9933;
+	font-weight: 700;
+	padding: 10px 5px;
+	background-color: rgba(8, 8, 8, 0.8);
+}
+.edit:hover, .google:hover{
+	color: #ff9933;
+	text-decoration: none;
+}
