@@ -211,7 +211,7 @@ def get_brs_info(request):
     student.student_name = soup.find('div', {'class': 'username'}).text
     student.schadule = schadule
     student.save()
-    return HttpResponseRedirect('/account/')
+    return HttpResponseRedirect('/account/get_sidebar.html')
 
 @login_required
 @transaction.atomic

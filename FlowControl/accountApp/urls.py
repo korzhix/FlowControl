@@ -11,7 +11,6 @@ urlpatterns = [
     re_path('register.html', views.RegisterFormView.as_view()),
     re_path('sync_brs.html', views.get_brs_info),
     re_path('generate_sidebar', views.generate_sidebar),
-    re_path('register_notes.html', views.register_note_client),
     re_path('settings.html', views.settings_view),
     re_path(r'', views.user_page, name='login'),
 
