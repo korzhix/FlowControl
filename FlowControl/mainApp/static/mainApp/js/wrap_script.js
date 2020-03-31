@@ -1,4 +1,4 @@
-$( ".sidebar-item-link" ).click(function() {
+    $( ".sidebar-item-link" ).click(function() {
 	$( this.nextElementSibling ).toggleClass( "submenu-active", 1000, "ease-in");
 	$( this ).toggleClass( "sidebar-item-link-active", 1000, "ease-in" );
 
