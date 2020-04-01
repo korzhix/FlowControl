@@ -21,7 +21,6 @@ def display_notes(request):
 		notes_url = settings.url_of_notes
 		sidebar_items = Sidebar.objects.all()
 		url = str(request.get_full_path())
-		print(url)
 		start_index =url.find('link=') + len('link=')
 
 		if start_index != len('link=') -1:
@@ -39,6 +38,25 @@ def display_notes(request):
 					item_name = 'Заметки'
 				except Sidebar.MultipleObjectsReturned:
 					item_name = 'Заметки'
+
+
+				try:
+					item = Sidebar.objects.get(aims_link=url)
+					item_name = item.name
+					notes_url = url
+				except Sidebar.DoesNotExist:
+					pass
+				except Sidebar.MultipleObjectsReturned:
+					pass
+
+				try:
+					item = Sidebar.objects.get(todo_link=url)
+					item_name = item.name
+					notes_url = url
+				except Sidebar.DoesNotExist:
+					pass
+				except Sidebar.MultipleObjectsReturned:
+					pass
 		else:
 			item_name = 'Заметки'
 		return render(request, 'mainApp/notes.html', {'notes_url': notes_url, 'item_name': item_name,

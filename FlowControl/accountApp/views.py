@@ -268,7 +268,7 @@ def generate_sidebar(request):
 
 @login_required
 def settings_view(request):
-    sidebar_items = Sidebar.objects.all()
+    sidebar_items = Sidebar.objects.filter(student=request.user.profile)
     if request.method == 'POST':
 
         settings_form = SettingsForm(request.POST, instance=request.user.settings)
@@ -279,7 +279,7 @@ def settings_view(request):
             if settings_form.is_valid() and sidebar_form.is_valid():
 
                 disc_name = sidebar_form.cleaned_data['name']
-                sidebar_item = Sidebar.objects.get(name=disc_name)
+                sidebar_item = Sidebar.objects.get(name=disc_name, student=request.user.profile)
                 sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
                 sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
                 sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
