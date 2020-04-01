@@ -2,7 +2,8 @@ const pass1 = document.getElementById('id_password1');
 const pass = document.getElementById('id_password');
 const pass2 = document.getElementById('id_password2');
 const user = document.getElementById('id_username');
-if (pass1 !== null){
+
+if (pass1 !== null){ 
 	pass1.placeholder = "Пароль";
 }
 if (pass !== null){
