@@ -1,4 +1,4 @@
-    $( ".sidebar-item-link" ).click(function() {
+$( ".sidebar-item-link" ).click(function() {
 	$( this.nextElementSibling ).toggleClass( "submenu-active", 1000, "ease-in");
 	$( this ).toggleClass( "sidebar-item-link-active", 1000, "ease-in" );
 
@@ -7,8 +7,8 @@
 	}else{
 		$(this.parentNode).css("background-color", "black");
 	};
-
 });
+
 $('li.sidebar-item').click(function(){
 	$('this').css("border-left", "1px solid red");
 });
@@ -45,3 +45,9 @@ if (document.location.pathname === '/'){
 
 };
 document.addEventListener('click', nextPage);
+
+$( ".changer_link" ).click(function() {
+	$(".changer_link").removeClass('changer_link-active');
+	$( this ).addClass("changer_link-active");
+
+});
