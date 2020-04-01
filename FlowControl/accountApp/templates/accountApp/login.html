@@ -11,22 +11,25 @@
 	<link rel="stylesheet" href="{% static 'mainApp/css/wrapper_styles.css' %}" type="text/css">
 
 <body>
-	<ul class="nav sign_nav" id="myTab" role="tablist">
-		<li class="nav-item sign-item">
-		    <a class="nav-link sign-link sign-link-active" id="10" href="login.html">Авторизация</a>
-		</li>
-		<li class="nav-item sign-item">
-		    <a class="nav-link sign-link" id="11" href="register.html">Регистрация</a>
-		</li>
-	</ul>
-	<form action="" method="post">
-		<div class="field_log">
-			{% csrf_token %}
-		    <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
-		    {{ form.as_p }}
-		    <button class="but-log" type="submit">Войти</button>
-		</div>
-	</form>
+	<div class="wrap">
+		<ul class="nav sign_nav" id="myTab" role="tablist">
+			<li class="nav-item sign-item">
+			    <a class="nav-link sign-link sign-link-active" id="10" href="login.html">Авторизация</a>
+			</li>
+			<li class="nav-item sign-item">
+			    <a class="nav-link sign-link" id="11" href="register.html">Регистрация</a>
+			</li>
+		</ul>
+		<form action="" method="post">
+			<div class="field_log">
+				{% csrf_token %}
+			    <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+			    {{ form.as_p }}
+			    <button class="but-log" type="submit">Войти</button>
+			</div>
+		</form>
+	</div>
+	
 </body>
 </html>
 {% endblock %}
