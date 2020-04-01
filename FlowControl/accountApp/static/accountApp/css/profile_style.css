@@ -20,7 +20,7 @@
 }
 
 #id_password, #id_password1, #id_password2, #id_username, #id_url_of_notes, #id_url_of_disk, 
-#id_homework_link, #id_aims_link, #id_todo_link, #id_name, .brs_sync_set, #id_email, #id_sfedu_username,
+#id_homework_link, #id_aims_link, #id_todo_link, #id_name, #id_email, #id_sfedu_username,
 #id_sfedu_pass{
 	background: none;
 	border: none;
@@ -69,6 +69,7 @@
 	width: 165px;
 	height: 185px;
 	object-fit: cover;
+	margin-bottom: 20px;
 }
 .profile_info, .profile_name, .exit{
 	color: white;
@@ -78,17 +79,19 @@
 	text-decoration: none;
 	padding-top: 5px;
 	margin-bottom: 40px;
+	width: 165px;
 }
 .exit:hover{
 	color: white;
 }
-.edit, .google{
+.edit, .google, .exit{
 	color: #ff9933;
 	font-weight: 700;
 	padding: 10px 5px;
 	background-color: rgba(8, 8, 8, 0.8);
+	text-align: center;
 }
-.edit:hover, .google:hover{
+.edit:hover, .google:hover, .exit:hover{
 	color: #ff9933;
 	text-decoration: none;
 }
