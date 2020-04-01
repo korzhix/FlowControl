@@ -18,7 +18,7 @@
 	text-decoration: none;
 }
 .brs_sync_set{
-	color: white;
+	
 }
 .brs_sync_set:hover{
 	text-decoration: none;
@@ -31,13 +31,12 @@
     padding-right: 10px;
 }
 .brs_sync_set{
-	width: 150px;
-	float: right;
-	padding: 0 15px;
-    margin-right: 18px;
+	color: #fa8e2b;
+	font-size: 39px;
 }
 .brs_sync_set:hover{
-	color: white;
+	color: #fa8e2b;
+	text-decoration: none;
 }
 
 .brs_refresh:hover{
