@@ -11,12 +11,6 @@
     background-color: rgba(8,8,8, 0.8);
     margin-top: 0;
 }
-.settings{
-	font-size: 30px;
-}
-.settings:hover{
-	text-decoration: none;
-}
 .brs_sync_set{
 	
 }
@@ -30,11 +24,11 @@
     float: right;
     padding-right: 10px;
 }
-.brs_sync_set{
+.brs_sync_set, .settings{
 	color: #fa8e2b;
-	font-size: 39px;
+	font-size: 40px;
 }
-.brs_sync_set:hover{
+.brs_sync_set:hover,  .settings:hover{
 	color: #fa8e2b;
 	text-decoration: none;
 }

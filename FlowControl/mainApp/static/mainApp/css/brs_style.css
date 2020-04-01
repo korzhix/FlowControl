@@ -2,7 +2,9 @@
 	padding-top: 20px !important;
 	padding-bottom: 50px;
 }
-
+.brs_container {
+    background-color: white;
+}
 
 .schadule-string, .current-scores-string, .max-current-scores-string, .absolute-max-scores-line{
 	display: none;
