@@ -12,7 +12,7 @@ function srezi(s) {
     };
     s = arr.join(' ');
     return s;
-}
+} 
 
 let subjects = document.getElementsByClassName('schadule-string')[0];
 subjects = subjects.innerHTML.trim();
