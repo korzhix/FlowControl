@@ -13,8 +13,12 @@
 }
 
 .help-container{
-	background-color: rgba(8, 8, 8, 0.8);
+	background-color: rgba(8, 8, 8, 0.8)!important;
 	padding: 20px !important;
 	height: 1200px !important;
+}
+
+h3,h4,h5 {
+    width: auto;
 }
 

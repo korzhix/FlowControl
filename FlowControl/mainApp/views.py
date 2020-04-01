@@ -74,3 +74,9 @@ def brs_view(request):
 	sidebar_items = Sidebar.objects.all()
 	return render(request, 'mainApp/brs.html', {'schadule': schadule, 'max_current': max_current,
 												'current': current, 'absolute_max': absolute_max, 'sidebar_items': sidebar_items})
+def reference_view(request):
+	if request.user.pk is not None:
+		sidebar_items = Sidebar.objects.all()
+		return render(request, 'mainApp/help.html', {'sidebar_items': sidebar_items})
+	else:
+		return render(request, 'mainApp/help.html', {'sidebar_items': []})
