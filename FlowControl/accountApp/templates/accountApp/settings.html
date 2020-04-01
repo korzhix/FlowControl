@@ -7,12 +7,6 @@
 			{% csrf_token %}
 		    <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
 		    {{ settings_form.as_p }}
-		    <p>
-		    	<div class="col-4 offset-1"></div>
-			    <div class="col-5">
-			    	<a class="brs_sync_set" href="/account/sync_brs.html">Обновить БРС</a>
-			    </div>
-		    </p>
 		    
 		    <button class="but-log set_but" type="submit">Подтвердить</button>
 		</div>    
