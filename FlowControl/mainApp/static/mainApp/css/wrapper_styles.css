@@ -271,7 +271,8 @@ input:-webkit-autofill {
 	border-bottom: 2px solid #ffcc33;
 }
 
-#id_password, #id_password1, #id_password2, #id_username{
+#id_password, #id_password1, #id_password2, #id_username, #id_url_of_notes, #id_url_of_disk, 
+#id_homework_link, #id_aims_link, #id_todo_link, #id_name{
 	background: none;
 	border: none;
 	border-bottom: 1px solid white;
@@ -280,9 +281,6 @@ input:-webkit-autofill {
 	margin-bottom: 60px;
 	color: white;
 	font-size: 18px;
-}
-#id_password::placeholder-shown{
-	content: "Пароль";
 }
 
 .but-log{
@@ -306,9 +304,43 @@ input:-webkit-autofill {
 }
 
 
+.wrap{
+	margin: 0 200px;
+    padding-bottom: 20px;
+    background-color: rgba(8,8,8, 0.8);
+}
 
 
 
+/*   Стили настроек    */
+.set_head{
+	color: white;
+	text-align: center;
+	margin-bottom: 40px;
+}
+.set_but{
+	margin-bottom: 20px;
+}
+.wrap_set{
+	padding: 20px;
+    background-color: rgba(8,8,8, 0.8);
+    margin-top: 0;
+}
+.wrap_set > form > .row > p > label{
+	color: white;
+}
+.wrap_set > form > .row > p{
+	width: 100%;
+}
+.wrap_set > form > .row{
+	justify-content: center;
+}
+#id_url_of_notes, #id_url_of_disk, #id_homework_link, #id_aims_link, #id_todo_link, #id_name{
+	margin-bottom: 20px;
+}
+#id_name > option {
+	background-color: rgba(8, 8, 8, 0.95);
+}
 @media screen and (max-width: 992px){
 	.header-list{
 		width: auto;
