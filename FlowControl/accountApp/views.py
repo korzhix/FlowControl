@@ -26,7 +26,7 @@ class RegisterFormView(FormView):
     form_class = UserCreationForm
     # Ссылка, на которую будет перенаправляться пользователь в случае успешной регистрации.
     # В данном случае указана ссылка на страницу входа для зарегистрированных пользователей.
-    success_url = "/"
+    success_url = "/account"
 
     # Шаблон, который будет использоваться при отображении представления.
     template_name = "accountApp/register.html"
@@ -48,7 +48,7 @@ class LoginFormView(FormView):
     template_name = "accountApp/login.html"
 
     # В случае успеха перенаправим на главную.
-    success_url = "/"
+    success_url = "/account/"
 
     def form_valid(self, form):
         # Получаем объект пользователя на основе введённых в форму данных.
@@ -69,61 +69,69 @@ class LogoutView(View):
 
 
 def user_page(request):
-    if request.user.pk is not None:
-        student = Profile.objects.get(pk=request.user.pk)
-        info = student.student_info
-        if info == 'empty':
-            info = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
-            sidebar_items = 'Введите учетные данные ЛК ЮФУ, чтобы видеть подробную информацию.'
+    if request.user.is_authenticated:
+        student = request.user.profile
+        labels = []
+        contents = []
+        #print(str(student.student_info) not in 'Введите учетные данные ЮФУ.','\n',str(student.student_info))
+        if 'Введите учетные данные ЮФУ.' not in str(student.student_info):
+            info = str(student.student_info)[2:-2].split('", ')
+            for i in range(len(info)):
+                info[i] = info[i].replace('"', '')
+                label = info[i].split(':')[0]
+                content = info[i].split(':')[1]
+                labels.append(label)
+                contents.append(content)
+            info = zip(labels, contents)
         else:
-            sidebar_items = Sidebar.objects.all()
+            info = zip([],[])
+        sidebar_items = request.user.profile.sidebar_set.all()
         return render(request, 'accountApp/user.html', {'info': info, 'sidebar_items': sidebar_items})
 
     return render(request, 'accountApp/user.html')
 
-@login_required()
-def register_note_client(request, email='korzh@sfedu.ru', password='Vk#nF#RwA4.LpW2'):
-    url_to_register = r'https://nimbusweb.me/auth?f=register&int_source=top_button_no_email'
-
-    headers_to_register = {
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'ru,en-US;q=0.9,en;q=0.8,ru-RU;q=0.7,und;q=0.6,de;q=0.5',
-        'origin': 'https://nimbusweb.me',
-        'referer': 'https://nimbusweb.me/ru/',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-site': 'same-origin',
-        'upgrade-insecure-requests': '1',
-    }
-
-    headers_to_form = {
-        'accept': '*/*',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'ru,en-US;q=0.9,en;q=0.8,ru-RU;q=0.7,und;q=0.6,de;q=0.5',
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'cookie': 'NM_FIRST_CLICK=%7B%22first-click-referer%22%3A%22https%3A%5C%2F%5C%2Fwww.google.com%5C%2F%22%2C%22first-click-utm-source%22%3A%22nodata%22%2C%22first-click-utm-medium%22%3A%22direct%22%2C%22first-click-utm-campaign%22%3A%22%22%2C%22first-click-utm-term%22%3A%22%22%2C%22first-click-utm-content%22%3A%22%22%2C%22first-click-date%22%3A%222020-03-30+12%3A56%3A56%22%7D; eversessionid=11g64W17eq6p2B3VHxcoxIaZeHnN17kF; _ga=GA1.2.564419870.1585573020; _gid=GA1.2.1016265769.1585573020; NM_LAST_CLICK=%7B%22last-click-referer%22%3A%22%22%2C%22last-click-utm-source%22%3A%22nodata%22%2C%22last-click-utm-medium%22%3A%22direct%22%2C%22last-click-utm-campaign%22%3A%22%22%2C%22last-click-utm-term%22%3A%22%22%2C%22last-click-utm-content%22%3A%22%22%2C%22last-click-date%22%3A%222020-03-30+12%3A57%3A08%22%7D; _fbp=fb.1.1585573031765.416816130; _gat_gtag_UA_67774717_27=1; _gali=form_register',
-        'origin': 'https://nimbusweb.me',
-        'referer': 'https://nimbusweb.me/auth/?f=register&int_source=top_button_no_email',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'x-client-software': 'auth_form',
-        'x-requested-with': 'XMLHttpRequest',
-    }
-
-    url_to_pass_form = r'https://nimbusweb.me/auth/api/register'
-    payload = {"login": email, "password": password, "service": "nimbus", "subscribe": 'true'}
-    with requests.Session() as s:
-        responce_from_register_page = s.get(url_to_register, headers=headers_to_register)
-        responce_from_post = s.post(url_to_pass_form, headers=headers_to_form, data=payload)
-
-    return HttpResponse(responce_from_post)
+# @login_required()
+# def register_note_client(request, email='korzh@sfedu.ru', password='Vk#nF#RwA4.LpW2'):
+#     url_to_register = r'https://nimbusweb.me/auth?f=register&int_source=top_button_no_email'
+#
+#     headers_to_register = {
+#         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+#         'accept-encoding': 'gzip, deflate, br',
+#         'accept-language': 'ru,en-US;q=0.9,en;q=0.8,ru-RU;q=0.7,und;q=0.6,de;q=0.5',
+#         'origin': 'https://nimbusweb.me',
+#         'referer': 'https://nimbusweb.me/ru/',
+#         'sec-fetch-mode': 'navigate',
+#         'sec-fetch-site': 'same-origin',
+#         'upgrade-insecure-requests': '1',
+#     }
+#
+#     headers_to_form = {
+#         'accept': '*/*',
+#         'accept-encoding': 'gzip, deflate, br',
+#         'accept-language': 'ru,en-US;q=0.9,en;q=0.8,ru-RU;q=0.7,und;q=0.6,de;q=0.5',
+#         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+#         'cookie': 'NM_FIRST_CLICK=%7B%22first-click-referer%22%3A%22https%3A%5C%2F%5C%2Fwww.google.com%5C%2F%22%2C%22first-click-utm-source%22%3A%22nodata%22%2C%22first-click-utm-medium%22%3A%22direct%22%2C%22first-click-utm-campaign%22%3A%22%22%2C%22first-click-utm-term%22%3A%22%22%2C%22first-click-utm-content%22%3A%22%22%2C%22first-click-date%22%3A%222020-03-30+12%3A56%3A56%22%7D; eversessionid=11g64W17eq6p2B3VHxcoxIaZeHnN17kF; _ga=GA1.2.564419870.1585573020; _gid=GA1.2.1016265769.1585573020; NM_LAST_CLICK=%7B%22last-click-referer%22%3A%22%22%2C%22last-click-utm-source%22%3A%22nodata%22%2C%22last-click-utm-medium%22%3A%22direct%22%2C%22last-click-utm-campaign%22%3A%22%22%2C%22last-click-utm-term%22%3A%22%22%2C%22last-click-utm-content%22%3A%22%22%2C%22last-click-date%22%3A%222020-03-30+12%3A57%3A08%22%7D; _fbp=fb.1.1585573031765.416816130; _gat_gtag_UA_67774717_27=1; _gali=form_register',
+#         'origin': 'https://nimbusweb.me',
+#         'referer': 'https://nimbusweb.me/auth/?f=register&int_source=top_button_no_email',
+#         'sec-fetch-mode': 'cors',
+#         'sec-fetch-site': 'same-origin',
+#         'x-client-software': 'auth_form',
+#         'x-requested-with': 'XMLHttpRequest',
+#     }
+#
+#     url_to_pass_form = r'https://nimbusweb.me/auth/api/register'
+#     payload = {"login": email, "password": password, "service": "nimbus", "subscribe": 'true'}
+#     with requests.Session() as s:
+#         responce_from_register_page = s.get(url_to_register, headers=headers_to_register)
+#         responce_from_post = s.post(url_to_pass_form, headers=headers_to_form, data=payload)
+#
+#     return HttpResponse(responce_from_post)
 
 @login_required()
 def get_brs_info(request):
 
     user = request.user
-    #student_settings = Settings.objects.create(user=user)
-    student = Profile.objects.get(pk=user.pk)
+    student = user.profile
     payload_to_login = {'openid_url': student.sfedu_username, 'password': student.sfedu_pass}
 
     headers_to_login = {
@@ -190,19 +198,19 @@ def get_brs_info(request):
     for tag in student_info_tags[1:]:
         student_info.append(tag.text)
     student_info = str(student_info)
-    student_info = "'" + student_info.replace("'",'"') + "'"
+    student_info = student_info.replace("'",'"')
 
     schadule = str(schadule)
-    schadule = "'" + schadule.replace("'", '"') + "'"
+    schadule = schadule.replace("'", '"') 
 
     current = str(current)
-    current = "'" + current.replace("'", '"') + "'"
+    current = current.replace("'", '"')
 
     current_max = str(current_max)
-    current_max = "'" + current_max.replace("'", '"') + "'"
+    current_max = current_max.replace("'", '"')
 
     absolute_max = str(absolute_max)
-    absolute_max = "'" + absolute_max.replace("'", '"') + "'"
+    absolute_max = absolute_max.replace("'", '"')
 
     student.current_scores = current
     student.current_max_scores = current_max
@@ -211,7 +219,7 @@ def get_brs_info(request):
     student.student_name = soup.find('div', {'class': 'username'}).text
     student.schadule = schadule
     student.save()
-    return HttpResponseRedirect('/account/get_sidebar.html')
+    return HttpResponseRedirect('/account/generate_sidebar.html')
 
 @login_required
 @transaction.atomic
@@ -223,14 +231,14 @@ def update_profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, ('Your profile was successfully updated!'))
-            return redirect('/')
+            return redirect('/account/sync_brs.html')
         else:
             messages.error(request, ('Please correct the error below.'))
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    if request.user.pk is not None:
-        sidebar_items = Sidebar.objects.all()
+    if request.user.is_authenticated:
+        sidebar_items = request.user.profile.sidebar_set.all()
         return render(request, 'accountApp/edit.html', {'sidebar_items': sidebar_items,
                                                             'user_form': user_form, 'profile_form': profile_form})
 
@@ -241,29 +249,31 @@ def update_profile(request):
 
 @login_required
 def generate_sidebar(request):
-    user = request.user
-    student = Profile.objects.get(pk=request.user.pk)
-    schadule = student.schadule[2:-2].replace('"', '').split(',')
-    #settings = user.settings
-    settings = Settings.objects.get(pk=request.user.pk)
+
+    student = request.user.profile
+    schadule = student.schadule[2:-2].replace('"', '').split(', ')
+    settings = request.user.settings
     notes_url = settings.url_of_notes
-
+    #student.sidebar_set.all().delete()
+    Sidebar.objects.all().delete()
     for name in schadule:
-        try:
-            item = Sidebar.objects.get(name=name)
-            item.name = name
-            item.homework_link = notes_url
-            item.aims_link = notes_url
-            item.todo_link = notes_url
-            item.save()
-        except Sidebar.DoesNotExist as ex:
-            Sidebar.objects.create(name=name, homework_link=notes_url, aims_link=notes_url, todo_link=notes_url)
+        Sidebar.objects.get_or_create(student=student, name=name, homework_link=notes_url, aims_link=notes_url, todo_link=notes_url)
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/brs.html')
 
 @login_required
 def settings_view(request):
-    sidebar_items = Sidebar.objects.all()
+    sidebar_items = request.user.profile.sidebar_set.all()
+    settings = request.user.settings
+    sidebar_initials = {
+        'homework_link': settings.url_of_notes,
+        'aims_link': settings.url_of_notes,
+        'todo_link': settings.url_of_notes
+    }
+
+
+    print(Sidebar.objects.all())
+
     if request.method == 'POST':
 
         settings_form = SettingsForm(request.POST, instance=request.user.settings)
@@ -274,7 +284,7 @@ def settings_view(request):
             if settings_form.is_valid() and sidebar_form.is_valid():
 
                 disc_name = sidebar_form.cleaned_data['name']
-                sidebar_item = Sidebar.objects.get(name=disc_name)
+                sidebar_item = request.user.profile.sidebar_set.get(name=disc_name)#Sidebar.objects.get(student=request.user.profile, name=disc_name)
                 sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
                 sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
                 sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
@@ -299,11 +309,11 @@ def settings_view(request):
                                                       'url_of_disk': request.user.settings.url_of_disk})
 
                 disc_name = sidebar_form.cleaned_data['name']
-                sidebar_item = Sidebar.objects.get(name=disc_name)
+                sidebar_item = request.user.profile.sidebar_set.get(name=disc_name)
                 sidebar_item.homework_link = sidebar_form.cleaned_data['homework_link']
                 sidebar_item.aims_link = sidebar_form.cleaned_data['aims_link']
                 sidebar_item.todo_link = sidebar_form.cleaned_data['todo_link']
-                print(sidebar_item.name, sidebar_item.homework_link, sidebar_item.aims_link)
+                #print(sidebar_item.name, sidebar_item.homework_link, sidebar_item.aims_link)
                 sidebar_item.save()
 
                 messages.success(request, ('Your profile was successfully updated!'))
@@ -312,7 +322,7 @@ def settings_view(request):
                                                                     'sidebar_items': sidebar_items})
 
         else:
-
+            print('here')
             messages.error(request, ('Please correct the error below.'))
             return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
                                                                 'sidebar_form': sidebar_form,
@@ -322,7 +332,8 @@ def settings_view(request):
         settings_form = SettingsForm(instance=request.user.settings, initial={'url_of_notes': request.user.settings.url_of_notes,
                             'url_of_disk': request.user.settings.url_of_disk})
 
-        sidebar_form = SidebarForm()
+        sidebar_form = SidebarForm(initial=sidebar_initials)
+
         return render(request, 'accountApp/settings.html', {'settings_form': settings_form,
                                                             'sidebar_form': sidebar_form, 'sidebar_items': sidebar_items})
 

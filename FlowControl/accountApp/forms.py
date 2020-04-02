@@ -14,12 +14,12 @@ class SettingsForm(ModelForm):
 
 class SidebarForm(forms.Form):
     choices = [(item.name, item.name) for item in Sidebar.objects.all()]
-    name = forms.ChoiceField(choices=choices)
-    homework_link = forms.URLField()
-    aims_link = forms.URLField()
-    todo_link = forms.URLField()
+    name = forms.ChoiceField(choices=choices, label='Название потока')
+    homework_link = forms.URLField(label='Домашнее задание')
+    aims_link = forms.URLField(label='Цели')
+    todo_link = forms.URLField(label='To do')
 
-class ProfileForm(ModelForm):
+class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile

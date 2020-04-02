@@ -7,14 +7,20 @@
     <title></title>
 </head>
 <body>
-<h1 style="color: white; background-color: black;">Введите ваши учетные данные sfedu</h1>
+	<div class="wrap_set">
+		<h1 class="set_head">Введите ваши учетные данные sfedu</h1>
+		<form method="post" action="/account/edit.html">
+			<div class="row">
+				{% csrf_token %}
+				{{ user_form.as_p }}
+				{{ profile_form.as_p }}
+				<button class="but-log set_but" type="submit">Save changes</button>
+			</div>
+		</form>
+	</div>
 
-<form method="post" action="/account/">
-  {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ profile_form.as_p }}
-  <button type="submit">Save changes</button>
-</form>
+
+
 </body>
 </html>
 {% endblock %}
