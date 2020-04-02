@@ -16,7 +16,7 @@ class Profile(models.Model):
     current_scores = models.CharField(max_length=5000, default='empty')
     current_max_scores = models.CharField(max_length=5000, default='empty')
     absolute_max_scores = models.CharField(max_length=5000, default='empty')
-    student_info = models.CharField(max_length=5000, default='empty')
+    student_info = models.CharField(max_length=5000, default='Введите учетные данные ЮФУ.')
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
