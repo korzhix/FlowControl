@@ -1,0 +1,27 @@
+{% extends "mainApp/wrapper.html" %}
+{% block content %}
+
+<div class="wrap_set">
+	<h1 class="set_head">Настройки</h1>
+	<form action="/account/settings.html" method="post">
+		<div class="row">
+			{% csrf_token %}
+		    <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+		    {{ settings_form.as_p }}
+		    
+		    <button class="but-log set_but" type="submit">Подтвердить</button>
+		</div>    
+	</form>
+
+	<form action="/account/settings.html" method="post">
+		<div class="row">
+			{% csrf_token %}
+			<!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+			{{ sidebar_form.as_p }}
+			<button class="but-log set_but" type="submit">Подтвердить</button>
+		</div>
+	</form>
+</div>
+
+
+{% endblock %}

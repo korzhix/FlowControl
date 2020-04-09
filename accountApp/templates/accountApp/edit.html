@@ -1,0 +1,26 @@
+{% extends "mainApp/wrapper.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<div class="wrap_set">
+		<h1 class="set_head">Введите ваши учетные данные sfedu</h1>
+		<form method="post" action="/account/edit.html">
+			<div class="row">
+				{% csrf_token %}
+				{{ user_form.as_p }}
+				{{ profile_form.as_p }}
+				<button class="but-log set_but" type="submit">Save changes</button>
+			</div>
+		</form>
+	</div>
+
+
+
+</body>
+</html>
+{% endblock %}
