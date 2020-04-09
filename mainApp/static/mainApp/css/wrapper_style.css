@@ -97,6 +97,14 @@ input:-webkit-autofill {
 }
 .footer_description{
 	text-align: center;
+	color: light-gray;
+	
+	
+}
+
+.footer_description:hover {
+	text-decoration: none;
+	
 }
 .footer > .container{
 	margin: 0 auto;
@@ -109,3 +117,4 @@ input:-webkit-autofill {
 		width: auto;
 	}
 }
+
