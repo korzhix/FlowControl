@@ -74,6 +74,9 @@
 .profile_info, .profile_name, .exit{
 	color: white;
 }
+.settings{
+	color: #ff9933;
+}
 .exit{
 	display: block;
 	text-decoration: none;
