@@ -83,3 +83,8 @@ def reference_view(request):
 		return render(request, 'mainApp/help.html', {'sidebar_items': sidebar_items})
 	else:
 		return render(request, 'mainApp/help.html', {'sidebar_items': []})
+
+@login_required
+def schedule(request):
+	sidebar_items = request.user.profile.sidebar_set.all()
+	return render(request, 'mainApp/schedule.html', {'sidebar_items': sidebar_items})

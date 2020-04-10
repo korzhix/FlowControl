@@ -26,5 +26,6 @@ urlpatterns = [
 	path('notes.html',views.display_notes),
 	path('disk.html', views.disk_page, name="disk_page"),
 	path('brs.html', views.brs_view),
-	path('reference.html', views.reference_view)
+	path('reference.html', views.reference_view),
+	path('schedule.html', views.schedule)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -104,6 +104,7 @@ input:-webkit-autofill {
 
 .footer_description:hover {
 	text-decoration: none;
+	color: #ffcc33;
 	
 }
 .footer > .container{
